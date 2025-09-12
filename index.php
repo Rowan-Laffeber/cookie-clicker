@@ -9,6 +9,7 @@
 <body>
     <div class="cookieNcounter">
         <p class="counter" id="counter">0</p>
+        <p>hello</p>
         <img id="cookie" src="assets/pictures/Cookie.png" alt="cookie">
     </div>
 </body>
