@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'pixelfont';
+    src: url('../fonts/pixel-font-5x5.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+body{
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'pixelfont', sans-serif;
+  background-color: lightgrey;
+}
+.cookieNcounter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  max-width: fit-content;
+  height: 100dvh;
+}  
+.counter{
+  font-size: 3em;
+}
