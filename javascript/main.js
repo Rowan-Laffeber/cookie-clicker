@@ -27,11 +27,4 @@ cookie.addEventListener('mousedown', shrinkCookie);
 cookie.addEventListener('touchstart', shrinkCookie);
 
 
-class Cookies{
-    name;
-}
-let cookies = new Cookies();
-cookies.name = "chipszak";
-
-document.getElementById("cookies-name").innerText = cookies.name;
 
