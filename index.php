@@ -29,6 +29,10 @@
                 <img src="assets/pictures/Cookie.png" alt="cookie">
                 <p>theme 4</p>
             </div>
+            <div>
+                <img src="assets/pictures/Cookie.png" alt="cookie">
+                <p>theme 5</p>
+            </div>
         </div>
     </div>
     <div class="cookieNcounter">
@@ -40,9 +44,9 @@
             <p>upgrades</p>
         </div>
         <div class="upgrades">
-            <img class="item1" src="assets/pictures/Cookie.png" alt="">
-            <img class="item2" src="assets/pictures/Cookie.png" alt="">
-            <img class="item3" src="assets/pictures/Cookie.png" alt="">
+            <img id="2x-multiplier" class="item1" src="assets/pictures/2x_upgrade.png" alt="">
+            <img id="3x-multiplier" class="item2" src="assets/pictures/Cookie.png" alt="">
+            <img id="5x-multiplier" class="item3" src="assets/pictures/Cookie.png" alt="">
             <img class="item4" src="assets/pictures/Cookie.png" alt="">
             <img class="item5" src="assets/pictures/Cookie.png" alt="">
             <img class="item6" src="assets/pictures/Cookie.png" alt="">
