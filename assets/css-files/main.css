@@ -7,8 +7,8 @@
 body{
   margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
   font-family: 'pixelfont', sans-serif;
   background-color: lightgrey;
 }
@@ -18,9 +18,64 @@ body{
   align-items: center;
   justify-content: center;
   background-color: white;
-  max-width: fit-content;
   height: 100dvh;
+  width: 35em;
 }  
 .counter{
   font-size: 3em;
+}
+.sidemenus{
+  background-color: white;
+  margin: 1em;
+  width: 30em;
+  .side-header{
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+    p{
+      font-size: 1.5em;
+    }
+  }
+  .upgrades{
+    display: grid;
+    grid-template-areas:
+    'a b c d'
+    'e f g h'
+    'i j k l';
+    gap: 1em;
+    max-width: 30em;
+    padding: 1em;
+    img{
+      width: 6em;
+      height: auto;
+      border: 0.125em solid black;
+    }
+    .item1 { grid-area: a; }
+    .item2 { grid-area: b; }
+    .item3 { grid-area: c; }
+    .item4 { grid-area: d; }
+    .item5 { grid-area: e; }
+    .item6 { grid-area: f; }
+    .item7 { grid-area: g; }
+    .item8 { grid-area: h; }
+    .item9 { grid-area: i; }
+
+  }
+  .themes{
+    width: 30em;
+    div{
+      display: flex;
+      max-width: 28em;
+      margin: 1em;
+      border: 0.125em solid black;
+      img{
+        width: 6em;
+        height: auto;
+        p{
+          font-size: 1em;
+          width: 21.75;
+        }
+      }
+    }
+  }
 }
