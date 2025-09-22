@@ -48,7 +48,6 @@ class Cookie {
     '2x': new Upgrade(2, 10),
     '3x': new Upgrade(3, 30),
     '5x': new Upgrade(5, 100),
-    // add more as needed
   };
 
   document.getElementById('2x-multiplier').addEventListener('click', function() {
@@ -64,9 +63,8 @@ class Cookie {
   
   function buyMultiplier(key, buttonElement) {
     const upgrade = upgrades[key];
-  
     if (!upgrade || upgrade.active) return;  // Already bought or invalid
-  
+    
     if (cookieInstance.count >= upgrade.cost) {
       cookieInstance.count -= upgrade.cost;
       cookiesPerClick *= upgrade.multiplier;
@@ -80,4 +78,15 @@ class Cookie {
       alert('Not enough cookies!');
     }
   }
+  class Hallo{
+    hallo(){
+      console.log("hallo");
+    }
+  }
+  let hello = new Hallo();
+    hello.name = "hoi";
+    hello.hallo();
+
+
+  
   
