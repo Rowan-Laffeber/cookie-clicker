@@ -65,14 +65,13 @@ document.getElementById('3x-multiplier').addEventListener('click', function() {
   buyMultiplier('3x', this);
 });
 
-
 document.getElementById('5x-multiplier').addEventListener('click', function() {
   buyMultiplier('5x', this);
 });
 
 function buyMultiplier(key, buttonElement) {
   const upgrade = upgrades[key];
-  if (!upgrade || upgrade.active) return;  // Already bought or invalid
+  if (!upgrade || upgrade.active) return;
 
   if (cookieInstance.count >= upgrade.cost) {
     cookieInstance.count -= upgrade.cost;
@@ -88,15 +87,26 @@ function buyMultiplier(key, buttonElement) {
   }
 }
 
+// ===== Helpers for em conversion =====
+
+function emToPx(em) {
+  const fontSize = parseFloat(getComputedStyle(document.body).fontSize);
+  return em * fontSize;
+}
+
+function pxToEm(px) {
+  const fontSize = parseFloat(getComputedStyle(document.body).fontSize);
+  return px / fontSize;
+}
+
 // ===== Bot orbit animation =====
 
 const container = document.getElementById("botContainer");
 
 const centerX = container.clientWidth / 2;
 const centerY = container.clientHeight / 2;
-const moveSpeed = 3;
+const moveSpeed = emToPx(0.1875); // 3px → 0.1875em
 
-// Bot class stores spotIndex, references ring, handles its own DOM & position
 class Bot {
   constructor(spotIndex, ring, container) {
     this.spotIndex = spotIndex;
@@ -105,7 +115,6 @@ class Bot {
     this.el.classList.add('bot');
     container.appendChild(this.el);
 
-    // Initial position at maxDistance
     this.updatePosition(this.ring.maxDistance);
   }
 
@@ -114,22 +123,22 @@ class Bot {
     const x = centerX + distance * Math.cos(angle);
     const y = centerY + distance * Math.sin(angle);
     const deg = angle * (180 / Math.PI) + 90;
-    this.el.style.left = `${x}px`;
-    this.el.style.top = `${y}px`;
+
+    this.el.style.left = `${pxToEm(x)}em`;
+    this.el.style.top = `${pxToEm(y)}em`;
     this.el.style.transform = `translate(-50%, -50%) rotate(${deg}deg)`;
   }
 }
 
-// Ring class to hold ring parameters and state
 class Ring {
-  constructor(minDistance, maxDistance, numBotsMax) {
-    this.minDistance = minDistance;
-    this.maxDistance = maxDistance;
+  constructor(minDistanceEm, maxDistanceEm, numBotsMax) {
+    this.minDistance = emToPx(minDistanceEm);
+    this.maxDistance = emToPx(maxDistanceEm);
     this.numBotsMax = numBotsMax;
 
     this.currentSlotIndex = 0;
-    this.animationPhase = 0; // 0 = inward, 1 = outward
-    this.distance = maxDistance;
+    this.animationPhase = 0;
+    this.distance = this.maxDistance;
 
     this.bots = [];
     this.spots = [];
@@ -138,7 +147,6 @@ class Ring {
     }
   }
 
-  // Animate this ring one slot at a time, full cycle per slot, independent of bots presence
   animate() {
     const step = moveSpeed;
 
@@ -160,18 +168,15 @@ class Ring {
         }
 
         this.currentSlotIndex = (this.currentSlotIndex + 1) % this.numBotsMax;
-
       }
     }
 
-    // Move bot at current slot if exists
     if (this.currentSlotIndex < this.bots.length) {
       const bot = this.bots[this.currentSlotIndex];
       bot.updatePosition(this.distance);
     }
   }
 
-  // Add a bot to this ring
   addBot() {
     if (this.bots.length >= this.numBotsMax) return false;
 
@@ -181,15 +186,15 @@ class Ring {
   }
 }
 
-// Create rings array for easy management
+// Rings in em
 const rings = [
-  new Ring(110, 130, 36),
-  new Ring(150, 170, 48),
+  new Ring(6.875, 8.125, 36), 
+  new Ring(9.375, 10.625, 48),  
+  new Ring(11.875, 13.125, 60), 
 ];
 
 let isAnimating = false;
 
-// Animate all rings together
 function animate() {
   if (!isAnimating) {
     requestAnimationFrame(animate);
@@ -197,11 +202,9 @@ function animate() {
   }
 
   rings.forEach(ring => ring.animate());
-
   requestAnimationFrame(animate);
 }
 
-// Add bot to rings in order, start animation if not running
 function addBot() {
   const botCost = 10;
   if (cookieInstance.count < botCost) {
@@ -226,7 +229,6 @@ function addBot() {
   alert("Maximum bots reached on all rings!");
 }
 
-
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
 // ===== Optional test class =====
@@ -238,4 +240,3 @@ class Hallo {
 let hello = new Hallo();
 hello.name = "hoi";
 hello.hallo();
-
