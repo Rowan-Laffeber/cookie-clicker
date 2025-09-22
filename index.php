@@ -37,7 +37,9 @@
     </div>
     <div class="cookieNcounter">
         <p class="counter" id="counter">0</p>
-        <img id="cookie" src="assets/pictures/Cookie.png" alt="cookie">
+        <div class="container" id="botContainer">
+            <img class="cookie" id="cookie" src="assets/pictures/Cookie.png" alt="cookie" />
+        </div>
     </div>
     <div class="sidemenus">
     <div class="side-header">
@@ -52,7 +54,12 @@
             <img class="item6" src="assets/pictures/Cookie.png" alt="">
             <img class="item7" src="assets/pictures/Cookie.png" alt="">
             <img class="item8" src="assets/pictures/Cookie.png" alt="">
-            <img class="item9" src="assets/pictures/Cookie.png" alt="">
+        </div>
+        <div class="side-header">
+            <p>bots</p>
+        </div>
+        <div class="bots">
+            <img id="addBotBtn" src="assets/pictures/bot.png" alt="">
         </div>
     </div>
 </body>
