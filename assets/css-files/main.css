@@ -22,14 +22,14 @@ body {
   background-color: white;
   height: 100dvh;
   width: 35em;
-  gap: 1em; /* add some spacing between elements */
+  gap: 1em
 }
 
 .counter {
   font-size: 3em;
 }
 
-/* New container for cookie + bots */
+
 .container {
   position: relative;
   width: 32em;
@@ -52,7 +52,6 @@ body {
   z-index: 1;
 }
 
-/* Bots orbiting the cookie */
 .bot {
   position: absolute;
   width: 1em;

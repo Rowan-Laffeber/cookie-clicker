@@ -84,7 +84,6 @@
     const centerY = container.clientHeight / 2;
     const moveSpeed = 3;
 
-    // Bot class stores spotIndex, references ring, handles its own DOM & position
     class Bot {
       constructor(spotIndex, ring, container) {
         this.spotIndex = spotIndex;
@@ -93,7 +92,6 @@
         this.el.classList.add('bot');
         container.appendChild(this.el);
 
-        // Initial position at maxDistance
         this.updatePosition(this.ring.maxDistance);
       }
 
@@ -108,7 +106,6 @@
       }
     }
 
-    // Ring class to hold ring parameters and state
     class Ring {
       constructor(minDistance, maxDistance, numBotsMax) {
         this.minDistance = minDistance;
@@ -116,7 +113,7 @@
         this.numBotsMax = numBotsMax;
 
         this.currentSlotIndex = 0;
-        this.animationPhase = 0; // 0 = inward, 1 = outward
+        this.animationPhase = 0;
         this.distance = maxDistance;
 
         this.bots = [];
@@ -126,7 +123,6 @@
         }
       }
 
-      // Animate this ring one slot at a time, full cycle per slot, independent of bots presence
       animate() {
         const step = moveSpeed;
 
@@ -145,15 +141,13 @@
             this.currentSlotIndex = (this.currentSlotIndex + 1) % this.numBotsMax;
           }
         }
-
-        // Move bot at current slot if exists
+        
         if (this.currentSlotIndex < this.bots.length) {
           const bot = this.bots[this.currentSlotIndex];
           bot.updatePosition(this.distance);
         }
       }
 
-      // Add a bot to this ring
       addBot() {
         if (this.bots.length >= this.numBotsMax) return false;
 
@@ -163,7 +157,6 @@
       }
     }
 
-    // Create rings array for easy management
     const rings = [
       new Ring(110, 130, 36),
       new Ring(150, 170, 48),
@@ -171,7 +164,6 @@
 
     let isAnimating = false;
 
-    // Animate all rings together
     function animate() {
       if (!isAnimating) {
         requestAnimationFrame(animate);
@@ -183,7 +175,6 @@
       requestAnimationFrame(animate);
     }
 
-    // Add bot to rings in order, start animation if not running
     function addBot() {
       for (const ring of rings) {
         if (ring.bots.length < ring.numBotsMax) {

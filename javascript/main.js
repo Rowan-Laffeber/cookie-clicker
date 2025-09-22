@@ -1,6 +1,6 @@
-// ===== Cookie clicker logic =====
-
 class Cookie {
+  count;
+
   constructor() {
     this.count = 0;
   }
@@ -41,9 +41,11 @@ cookie.addEventListener('touchcancel', growCookie);
 cookie.addEventListener('mousedown', shrinkCookie);
 cookie.addEventListener('touchstart', shrinkCookie);
 
-// ===== Upgrades =====
-
 class Upgrade {
+  multiplier;
+  cost;
+  active;
+
   constructor(multiplier, cost) {
     this.multiplier = multiplier;
     this.cost = cost;
@@ -87,8 +89,6 @@ function buyMultiplier(key, buttonElement) {
   }
 }
 
-// ===== Helpers for em conversion =====
-
 function emToPx(em) {
   const fontSize = parseFloat(getComputedStyle(document.body).fontSize);
   return em * fontSize;
@@ -99,15 +99,18 @@ function pxToEm(px) {
   return px / fontSize;
 }
 
-// ===== Bot orbit animation =====
 
 const container = document.getElementById("botContainer");
 
 const centerX = container.clientWidth / 2;
 const centerY = container.clientHeight / 2;
-const moveSpeed = emToPx(0.1875); // 3px → 0.1875em
+const moveSpeed = emToPx(0.2);
 
 class Bot {
+  spotIndex;
+  ring;
+  el;
+
   constructor(spotIndex, ring, container) {
     this.spotIndex = spotIndex;
     this.ring = ring;
@@ -131,6 +134,15 @@ class Bot {
 }
 
 class Ring {
+  minDistance;
+  maxDistance;
+  numBotsMax;
+  currentSlotIndex;
+  animationPhase;
+  distance;
+  bots;
+  spots;
+
   constructor(minDistanceEm, maxDistanceEm, numBotsMax) {
     this.minDistance = emToPx(minDistanceEm);
     this.maxDistance = emToPx(maxDistanceEm);
@@ -186,11 +198,10 @@ class Ring {
   }
 }
 
-// Rings in em
 const rings = [
-  new Ring(6.875, 8.125, 36), 
-  new Ring(9.375, 10.625, 48),  
-  new Ring(11.875, 13.125, 60), 
+  new Ring(7, 8, 36), 
+  new Ring(9.5, 10.5, 48),  
+  new Ring(12, 13, 60), 
 ];
 
 let isAnimating = false;
@@ -231,8 +242,8 @@ function addBot() {
 
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
-// ===== Optional test class =====
 class Hallo {
+  name;
   hallo() {
     console.log("hallo");
   }
