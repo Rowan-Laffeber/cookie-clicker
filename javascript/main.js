@@ -10,6 +10,7 @@ let cookieInstance = new Cookie();
 const cookie = document.getElementById('cookie');
 const counter = document.getElementById('counter');
 
+
 let cookiesPerClick = 1;
 
 function updateCounter() {
@@ -242,22 +243,34 @@ function addBot() {
 
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
-class enemy {
-  health;
+//test class voor oefenen
+class Enemy {
   constructor(health) {
-    this.health = health;
+    const savedHealth = localStorage.getItem('enemyHealth');
+    this.health = savedHealth !== null ? Number(savedHealth) : health;
   }
 
-  takeDamage() {
-    
+  takeDamage(amount) {
+    this.health -= amount;
+    if (this.health < 0) this.health = 0;
+
+    localStorage.setItem('enemyHealth', this.health);
+
+    console.log(`Enemy took ${amount} damage, health now: ${this.health}`);
   }
 }
-class Player{
-  damage;
-  constructor(damage){
-this.damage = damage;
+
+class Player {
+  constructor(damage) {
+    this.damage = damage;
   }
-  giveDamage(){
-    
+
+  giveDamage(enemy) {
+    enemy.takeDamage(this.damage);
   }
 }
+
+const enemy = new Enemy(100);
+const player = new Player(2);
+
+player.giveDamage(enemy);
