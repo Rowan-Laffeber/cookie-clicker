@@ -248,13 +248,6 @@ function addBot() {
 
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
-//test class voor oefenen
-class Enemy {
-  constructor(health) {
-    const savedHealth = localStorage.getItem('enemyHealth');
-    this.health = savedHealth !== null ? Number(savedHealth) : health;
-  }
-}
 function saveProgress() {
   const progress = {
     count: cookieInstance.count,
@@ -313,12 +306,13 @@ function loadProgress() {
 loadProgress();
 updateCounter();
 
-class Hallo {
-  name;
-  hallo() {
-    console.log("hallo");
+//test class voor oefenen
+class Enemy {
+  health;
+  constructor(health) {
+    const savedHealth = localStorage.getItem('enemyHealth');
+    this.health = savedHealth !== null ? Number(savedHealth) : health;
   }
-
   takeDamage(amount) {
     this.health -= amount;
     if (this.health < 0) this.health = 0;
