@@ -104,7 +104,7 @@ const container = document.getElementById("botContainer");
 
 const centerX = container.clientWidth / 2;
 const centerY = container.clientHeight / 2;
-const moveSpeed = emToPx(0.2);
+const moveSpeed = emToPx(0.2); 
 
 class Bot {
   spotIndex;
@@ -242,12 +242,22 @@ function addBot() {
 
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
-class Hallo {
-  name;
-  hallo() {
-    console.log("hallo");
+class enemy {
+  health;
+  constructor(health) {
+    this.health = health;
+  }
+
+  takeDamage() {
+    
   }
 }
-let hello = new Hallo();
-hello.name = "hoi";
-hello.hallo();
+class Player{
+  damage;
+  constructor(damage){
+this.damage = damage;
+  }
+  giveDamage(){
+    
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Two Ring Bot Animation with Bot Class</title>
+  <title>bot animation</title>
   <style>
     html, body {
         margin: 0;
