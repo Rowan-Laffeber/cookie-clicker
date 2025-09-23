@@ -15,12 +15,12 @@ let cookiesPerClick = 1;
 
 function updateCounter() {
   counter.textContent = cookieInstance.count;
+  saveProgress();
 }
 
 function cookieClicked() {
   cookieInstance.count += cookiesPerClick;
   updateCounter();
-  saveProgress();
 }
 
 cookie.onclick = cookieClicked;
@@ -253,7 +253,8 @@ class Enemy {
   constructor(health) {
     const savedHealth = localStorage.getItem('enemyHealth');
     this.health = savedHealth !== null ? Number(savedHealth) : health;
-
+  }
+}
 function saveProgress() {
   const progress = {
     count: cookieInstance.count,
