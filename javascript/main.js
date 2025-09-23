@@ -20,6 +20,7 @@ function updateCounter() {
 function cookieClicked() {
   cookieInstance.count += cookiesPerClick;
   updateCounter();
+  saveProgress();
 }
 
 cookie.onclick = cookieClicked;
@@ -85,6 +86,8 @@ function buyMultiplier(key, buttonElement) {
 
     buttonElement.textContent = `${upgrade.multiplier}x Active`;
     buttonElement.style.backgroundColor = 'lightgreen';
+
+    saveProgress();
   } else {
     alert('Not enough cookies!');
   }
@@ -200,9 +203,9 @@ class Ring {
 }
 
 const rings = [
-  new Ring(7, 8, 36), 
-  new Ring(9.5, 10.5, 48),  
-  new Ring(12, 13, 60), 
+  new Ring(7, 8, 36),
+  new Ring(9.5, 10.5, 48),
+  new Ring(12, 13, 60),
 ];
 
 let isAnimating = false;
@@ -223,14 +226,16 @@ function addBot() {
     alert("Not enough cookies to buy a bot!");
     return;
   }
-  
+
   for (const ring of rings) {
     if (ring.bots.length < ring.numBotsMax) {
       cookieInstance.count -= botCost;
       updateCounter();
-      
+
       ring.addBot();
-      
+
+      saveProgress();
+
       if (!isAnimating) {
         isAnimating = true;
         animate();
@@ -248,6 +253,69 @@ class Enemy {
   constructor(health) {
     const savedHealth = localStorage.getItem('enemyHealth');
     this.health = savedHealth !== null ? Number(savedHealth) : health;
+
+function saveProgress() {
+  const progress = {
+    count: cookieInstance.count,
+    cookiesPerClick: cookiesPerClick,
+    upgrades: {},
+    botsPerRing: rings.map(ring => ring.bots.length),
+  };
+
+  for (const key in upgrades) {
+    progress.upgrades[key] = upgrades[key].active;
+  }
+
+  localStorage.setItem('cookieClickerProgress', JSON.stringify(progress));
+}
+
+function loadProgress() {
+  const saved = localStorage.getItem('cookieClickerProgress');
+  if (!saved) return;
+
+  const progress = JSON.parse(saved);
+
+  cookieInstance.count = progress.count || 0;
+  cookiesPerClick = progress.cookiesPerClick || 1;
+
+  for (const key in upgrades) {
+    upgrades[key].active = progress.upgrades[key] || false;
+    const button = document.getElementById(`${key}-multiplier`);
+    if (upgrades[key].active) {
+      button.textContent = `${upgrades[key].multiplier}x Active`;
+      button.style.backgroundColor = 'lightgreen';
+    } else {
+      button.textContent = `${upgrades[key].multiplier}x`;
+      button.style.backgroundColor = '';
+    }
+  }
+
+  updateCounter();
+
+  // Voeg bots toe volgens opgeslagen aantal
+  if (progress.botsPerRing) {
+    rings.forEach((ring, index) => {
+      const botsToAdd = progress.botsPerRing[index] || 0;
+      for (let i = 0; i < botsToAdd; i++) {
+        ring.addBot();
+      }
+    });
+
+    if (rings.some(ring => ring.bots.length > 0)) {
+      isAnimating = true;
+      animate();
+    }
+  }
+}
+
+// Laad voortgang zodra script geladen is:
+loadProgress();
+updateCounter();
+
+class Hallo {
+  name;
+  hallo() {
+    console.log("hallo");
   }
 
   takeDamage(amount) {
