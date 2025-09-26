@@ -11,32 +11,30 @@ body {
   flex-direction: row;
   justify-content: center;
   font-family: 'pixelfont', sans-serif;
-  background-color: lightgrey;
   font-size: 1em;
 }
+
 .cookieNcounter {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: white;
   height: 100dvh;
   width: 35em;
-  gap: 1em
+  gap: 1em;
 }
 
 .counter {
   font-size: 3em;
 }
 
-
 .container {
   position: relative;
   width: 32em;
   height: 32em;
-  border: 0.0625em solid #444;
   box-sizing: border-box;
-  background: transparent;
+  border-width: 0.0625em;
+  border-style: solid;
 }
 
 .cookie {
@@ -56,7 +54,6 @@ body {
   position: absolute;
   width: 1em;
   height: 1em;
-  background: rgb(108, 108, 108);
   border-radius: 50%;
   transform-origin: 50% 50%;
   transform: translate(-50%, -50%);
@@ -64,7 +61,6 @@ body {
 }
 
 .sidemenus {
-  background-color: white;
   margin: 1em;
   width: 30em;
 }
@@ -81,7 +77,7 @@ body {
   font-size: 1.5em;
 }
 
-.upgrades, .bots{
+.upgrades, .bots {
   display: grid;
   grid-template-areas:
     'a b c d'
@@ -95,7 +91,8 @@ body {
 .upgrades img, .bots img {
   width: 6em;
   height: auto;
-  border: 0.125em solid black;
+  border-width: 0.125em;
+  border-style: solid;
 }
 
 .item1 { grid-area: a; }
@@ -116,7 +113,8 @@ body {
   display: flex;
   max-width: 28em;
   margin: 1em;
-  border: 0.125em solid black;
+  border-width: 0.125em;
+  border-style: solid;
 }
 
 .themes div img {
@@ -127,4 +125,20 @@ body {
 .themes div p {
   font-size: 1em;
   width: 21.75em;
+}
+
+/* color transition */
+body, 
+.cookieNcounter, 
+.container, 
+.cookie, 
+.bot, 
+.sidemenus, 
+.upgrades img, 
+.bots img, 
+.themes div {
+  transition: 
+    background-color 0.5s ease, 
+    color 0.5s ease, 
+    border-color 0.5s ease;
 }

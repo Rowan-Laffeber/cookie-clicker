@@ -6,6 +6,7 @@
     <link rel="icon" href="assets/pictures/Cookie.png">
     <title>cookieclicker</title>
     <link rel="stylesheet" href="assets/css-files/main.css">
+    <link id="themeColors" rel="stylesheet" href="assets/css-files/light-mode.css">
 </head>
 <body>
     <div class="sidemenus">
@@ -13,13 +14,13 @@
             <p>themes</p>
         </div>
         <div class="themes">
-            <div>
+            <div id="lightmode">
                 <img src="assets/pictures/Cookie.png" alt="cookie">
-                <p>theme 1</p>
+                <p>lightmode</p>
             </div>
-            <div>
+            <div id="darkmode">
                 <img src="assets/pictures/Cookie.png" alt="cookie">
-                <p>theme 2</p>
+                <p>darkmode</p>
             </div>
             <div>
                 <img src="assets/pictures/Cookie.png" alt="cookie">

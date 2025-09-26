@@ -254,6 +254,7 @@ function saveProgress() {
     cookiesPerClick: cookiesPerClick,
     upgrades: {},
     botsPerRing: rings.map(ring => ring.bots.length),
+    activeTheme: Object.keys(themes).find(key => themes[key].active) || 'lightmode'
   };
 
   for (const key in upgrades) {
@@ -300,8 +301,49 @@ function loadProgress() {
       animate();
     }
   }
+    const savedTheme = progress.activeTheme || 'lightmode';
+  if (themes[savedTheme]) {
+    const el = document.getElementById(savedTheme);
+    switchTheme(savedTheme, el);
+  }
 }
 
+//theme-switcher
+class Theme {
+  cssFile;
+  active;
+
+  constructor(cssFile) {
+    this.cssFile = cssFile;
+    this.active = false;
+  }
+}
+
+const themes = {
+  lightmode: new Theme('assets/css-files/light-mode.css'),
+  darkmode: new Theme('assets/css-files/dark-mode.css'),
+};
+
+Object.keys(themes).forEach(key => {
+  const theme = themes[key];
+  const el = document.getElementById(key);
+
+  el.addEventListener('click', () => switchTheme(key, el));
+});
+
+function switchTheme(key, elClicked) {
+  Object.keys(themes).forEach(k => {
+    themes[k].active = false;
+    const div = document.getElementById(k);
+    div.style.backgroundColor = '';
+  });
+
+  themes[key].active = true;
+  elClicked.style.backgroundColor = 'lightgreen';
+
+  const link = document.getElementById('themeColors');
+  link.setAttribute('href', themes[key].cssFile);
+}
 // Laad voortgang zodra script geladen is:
 loadProgress();
 updateCounter();
