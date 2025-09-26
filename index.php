@@ -22,9 +22,9 @@
                 <img src="assets/pictures/Cookie.png" alt="cookie">
                 <p>darkmode</p>
             </div>
-            <div>
+            <div id="redmode">
                 <img src="assets/pictures/Cookie.png" alt="cookie">
-                <p>theme 3</p>
+                <p>redmode</p>
             </div>
             <div>
                 <img src="assets/pictures/Cookie.png" alt="cookie">

@@ -322,6 +322,7 @@ class Theme {
 const themes = {
   lightmode: new Theme('assets/css-files/light-mode.css'),
   darkmode: new Theme('assets/css-files/dark-mode.css'),
+  redmode: new Theme('assets/css-files/red-mode.css'),
 };
 
 Object.keys(themes).forEach(key => {

@@ -1,0 +1,31 @@
+body {
+  background-color: #330000;
+  color: #ff9999;
+}
+
+.cookieNcounter {
+  background-color: #660000;
+  color: #ffcccc;
+}
+
+.container {
+  border-color: #ff3333;
+}
+
+.bot {
+  background: rgb(200, 50, 50);
+}
+
+.sidemenus {
+  background-color: #660000;
+  color: #ffcccc;
+}
+
+.upgrades img, .bots img {
+  border-color: #ff6666;
+}
+
+.themes div {
+  border-color: #ff6666;
+  color: #ffcccc;
+}
