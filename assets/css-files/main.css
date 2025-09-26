@@ -35,6 +35,9 @@ body {
   box-sizing: border-box;
   border-width: 0.0625em;
   border-style: solid;
+
+  overflow: hidden;
+  z-index: 0;  
 }
 
 .cookie {
@@ -47,7 +50,7 @@ body {
   user-select: none;
   -webkit-user-drag: none;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
 }
 
 .bot {
@@ -57,7 +60,7 @@ body {
   border-radius: 50%;
   transform-origin: 50% 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 3;
 }
 
 .sidemenus {
