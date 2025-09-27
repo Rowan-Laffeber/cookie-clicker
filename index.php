@@ -62,6 +62,14 @@
         <div class="bots">
             <img id="addBotBtn" src="assets/pictures/bot.png" alt="">
         </div>
+        <div>
+            <button id="startChallengeBtn">Start Challenge</button>
+        </div>
+        <div id="challengeUI" style="display:none; text-align:center; margin: 1em;">
+            <div id="challengeTimer" style="font-size: 1.5em; font-weight: bold;">Time: 20s</div>
+            <div id="challengeClicks" style="font-size: 1.2em;">Clicks: 0 / 100</div>
+        </div>
+
     </div>
 </body>
 <script src="javascript/main.js"></script>

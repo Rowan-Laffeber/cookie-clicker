@@ -10,8 +10,21 @@ let cookieInstance = new Cookie();
 const cookie = document.getElementById('cookie');
 const counter = document.getElementById('counter');
 
-
 let cookiesPerClick = 1;
+
+// === Challenge Variables ===
+let isChallengeActive = false;
+let challengeClicks = 0;
+let challengeTimeout;
+const CHALLENGE_GOAL = 100;
+const CHALLENGE_TIME = 20000; // 20 seconds
+
+const challengeUI = document.getElementById('challengeUI');
+const challengeTimerDisplay = document.getElementById('challengeTimer');
+const challengeClicksDisplay = document.getElementById('challengeClicks');
+
+let challengeTimeLeft = CHALLENGE_TIME / 1000; // seconds
+let challengeInterval;
 
 function updateCounter() {
   counter.textContent = cookieInstance.count;
@@ -19,8 +32,16 @@ function updateCounter() {
 }
 
 function cookieClicked() {
-  cookieInstance.count += cookiesPerClick;
-  updateCounter();
+  if (isChallengeActive) {
+    challengeClicks++;
+    updateChallengeUI();
+    if (challengeClicks >= CHALLENGE_GOAL) {
+      endChallenge(true);
+    }
+  } else {
+    cookieInstance.count += cookiesPerClick;
+    updateCounter();
+  }
 }
 
 cookie.onclick = cookieClicked;
@@ -61,21 +82,21 @@ const upgrades = {
   '5x': new Upgrade(5, 100),
 };
 
-document.getElementById('2x-multiplier').addEventListener('click', function() {
+document.getElementById('2x-multiplier').addEventListener('click', function () {
   buyMultiplier('2x', this);
 });
 
-document.getElementById('3x-multiplier').addEventListener('click', function() {
+document.getElementById('3x-multiplier').addEventListener('click', function () {
   buyMultiplier('3x', this);
 });
 
-document.getElementById('5x-multiplier').addEventListener('click', function() {
+document.getElementById('5x-multiplier').addEventListener('click', function () {
   buyMultiplier('5x', this);
 });
 
 function buyMultiplier(key, buttonElement) {
   const upgrade = upgrades[key];
-  if (!upgrade || upgrade.active) return;
+  if (!upgrade || upgrade.active || isChallengeActive) return;
 
   if (cookieInstance.count >= upgrade.cost) {
     cookieInstance.count -= upgrade.cost;
@@ -103,12 +124,11 @@ function pxToEm(px) {
   return px / fontSize;
 }
 
-
 const container = document.getElementById("botContainer");
 
 const centerX = container.clientWidth / 2;
 const centerY = container.clientHeight / 2;
-const moveSpeed = emToPx(0.2); 
+const moveSpeed = emToPx(0.2);
 
 class Bot {
   spotIndex;
@@ -164,6 +184,8 @@ class Ring {
   }
 
   animate() {
+    if (isChallengeActive) return; // Pause bots during challenge
+
     const step = moveSpeed;
 
     if (this.animationPhase === 0) {
@@ -248,6 +270,85 @@ function addBot() {
 
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
+<<<<<<< Updated upstream
+=======
+// === CHALLENGE FUNCTIONS ===
+
+function startChallenge() {
+  if (isChallengeActive) return;
+
+  isChallengeActive = true;
+  challengeClicks = 0;
+  challengeTimeLeft = CHALLENGE_TIME / 1000;
+
+  // Disable bots animation during challenge
+  isAnimating = false;
+
+  // Show challenge UI
+  challengeUI.style.display = 'block';
+  updateChallengeUI();
+
+  alert("Challenge started! 100 clicks in 20 seconds – GO!");
+
+  // Start countdown timer
+  challengeInterval = setInterval(() => {
+    challengeTimeLeft--;
+    updateChallengeTimer();
+
+    if (challengeTimeLeft <= 0) {
+      endChallenge(challengeClicks >= CHALLENGE_GOAL);
+    }
+  }, 1000);
+
+  // Start cookie animation for challenge (example: pulse)
+  cookie.classList.add('challenge-pulse');
+}
+
+function updateChallengeUI() {
+  challengeClicksDisplay.textContent = `Clicks: ${challengeClicks} / ${CHALLENGE_GOAL}`;
+  challengeTimerDisplay.textContent = `Time: ${challengeTimeLeft}s`;
+}
+
+function updateChallengeTimer() {
+  challengeTimerDisplay.textContent = `Time: ${challengeTimeLeft}s`;
+}
+
+function endChallenge(success) {
+  isChallengeActive = false;
+  clearTimeout(challengeTimeout);
+  clearInterval(challengeInterval);
+
+  // Hide challenge UI
+  challengeUI.style.display = 'none';
+
+  // Remove cookie animation
+  cookie.classList.remove('challenge-pulse');
+
+  if (success) {
+    cookieInstance.count += 500;
+    alert("Challenge complete! +500 cookies!");
+  } else {
+    cookieInstance.count -= 1000;
+    if (cookieInstance.count < 0) cookieInstance.count = 0;
+    alert("Challenge failed! -1000 cookies!");
+  }
+
+  updateCounter();
+
+  // Resume bots animation if any bots exist
+  if (rings.some(ring => ring.bots.length > 0)) {
+    isAnimating = true;
+    animate();
+  }
+
+  saveProgress();
+}
+
+document.getElementById("startChallengeBtn").addEventListener("click", startChallenge);
+
+// === SAVE / LOAD ===
+
+>>>>>>> Stashed changes
 function saveProgress() {
   const progress = {
     count: cookieInstance.count,
@@ -269,37 +370,33 @@ function loadProgress() {
   if (!saved) return;
 
   const progress = JSON.parse(saved);
-
   cookieInstance.count = progress.count || 0;
   cookiesPerClick = progress.cookiesPerClick || 1;
 
   for (const key in upgrades) {
-    upgrades[key].active = progress.upgrades[key] || false;
-    const button = document.getElementById(`${key}-multiplier`);
+    upgrades[key].active = !!progress.upgrades[key];
     if (upgrades[key].active) {
-      button.textContent = `${upgrades[key].multiplier}x Active`;
-      button.style.backgroundColor = 'lightgreen';
-    } else {
-      button.textContent = `${upgrades[key].multiplier}x`;
-      button.style.backgroundColor = '';
+      const buttonElement = document.getElementById(`${key}-multiplier`);
+      if (buttonElement) {
+        buttonElement.textContent = `${upgrades[key].multiplier}x Active`;
+        buttonElement.style.backgroundColor = 'lightgreen';
+      }
     }
+  }
+
+  if (progress.botsPerRing) {
+    progress.botsPerRing.forEach((count, index) => {
+      for (let i = 0; i < count; i++) {
+        rings[index].addBot();
+      }
+    });
   }
 
   updateCounter();
 
-  // Voeg bots toe volgens opgeslagen aantal
-  if (progress.botsPerRing) {
-    rings.forEach((ring, index) => {
-      const botsToAdd = progress.botsPerRing[index] || 0;
-      for (let i = 0; i < botsToAdd; i++) {
-        ring.addBot();
-      }
-    });
-
-    if (rings.some(ring => ring.bots.length > 0)) {
-      isAnimating = true;
-      animate();
-    }
+  if (rings.some(ring => ring.bots.length > 0)) {
+    isAnimating = true;
+    animate();
   }
     const savedTheme = progress.activeTheme || 'lightmode';
   if (themes[savedTheme]) {
@@ -308,6 +405,7 @@ function loadProgress() {
   }
 }
 
+<<<<<<< Updated upstream
 //theme-switcher
 class Theme {
   cssFile;
@@ -380,3 +478,6 @@ const enemy = new Enemy(100);
 const player = new Player(2);
 
 player.giveDamage(enemy);
+=======
+loadProgress();
+>>>>>>> Stashed changes
