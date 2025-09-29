@@ -130,7 +130,6 @@ body {
   width: 21.75em;
 }
 
-<<<<<<< Updated upstream
 /* color transition */
 body, 
 .cookieNcounter, 
@@ -146,7 +145,6 @@ body,
     color 0.5s ease, 
     border-color 0.5s ease;
 }
-=======
 body.challenge-active #cookie {
   border: 3px solid red;
   animation: pulse 1s infinite;
@@ -167,5 +165,3 @@ body.challenge-active #cookie {
 .challenge-pulse {
   animation: pulse 1s infinite;
 }
-
->>>>>>> Stashed changes

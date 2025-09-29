@@ -270,8 +270,6 @@ function addBot() {
 
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
-<<<<<<< Updated upstream
-=======
 // === CHALLENGE FUNCTIONS ===
 
 function startChallenge() {
@@ -348,7 +346,6 @@ document.getElementById("startChallengeBtn").addEventListener("click", startChal
 
 // === SAVE / LOAD ===
 
->>>>>>> Stashed changes
 function saveProgress() {
   const progress = {
     count: cookieInstance.count,
@@ -404,8 +401,6 @@ function loadProgress() {
     switchTheme(savedTheme, el);
   }
 }
-
-<<<<<<< Updated upstream
 //theme-switcher
 class Theme {
   cssFile;
@@ -478,6 +473,3 @@ const enemy = new Enemy(100);
 const player = new Player(2);
 
 player.giveDamage(enemy);
-=======
-loadProgress();
->>>>>>> Stashed changes
