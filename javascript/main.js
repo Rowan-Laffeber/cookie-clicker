@@ -286,7 +286,7 @@ function startChallenge() {
   challengeUI.style.display = 'block';
   updateChallengeUI();
 
-  alert("Challenge started! 100 clicks in 20 seconds – GO!");
+  alert("Challenge started! 100 clicks in 20 seconds - GO!");
 
   // Start countdown timer
   challengeInterval = setInterval(() => {
@@ -343,6 +343,44 @@ function endChallenge(success) {
 }
 
 document.getElementById("startChallengeBtn").addEventListener("click", startChallenge);
+
+//theme-switcher
+class Theme {
+  cssFile;
+  active;
+
+  constructor(cssFile) {
+    this.cssFile = cssFile;
+    this.active = false;
+  }
+}
+
+const themes = {
+  lightmode: new Theme('assets/css-files/light-mode.css'),
+  darkmode: new Theme('assets/css-files/dark-mode.css'),
+  redmode: new Theme('assets/css-files/red-mode.css'),
+};
+
+Object.keys(themes).forEach(key => {
+  const theme = themes[key];
+  const el = document.getElementById(key);
+
+  el.addEventListener('click', () => switchTheme(key, el));
+});
+
+function switchTheme(key, elClicked) {
+  Object.keys(themes).forEach(k => {
+    themes[k].active = false;
+    const div = document.getElementById(k);
+    div.style.backgroundColor = '';
+  });
+
+  themes[key].active = true;
+  elClicked.style.backgroundColor = 'lightgreen';
+
+  const link = document.getElementById('themeColors');
+  link.setAttribute('href', themes[key].cssFile);
+}
 
 // === SAVE / LOAD ===
 
@@ -401,43 +439,7 @@ function loadProgress() {
     switchTheme(savedTheme, el);
   }
 }
-//theme-switcher
-class Theme {
-  cssFile;
-  active;
 
-  constructor(cssFile) {
-    this.cssFile = cssFile;
-    this.active = false;
-  }
-}
-
-const themes = {
-  lightmode: new Theme('assets/css-files/light-mode.css'),
-  darkmode: new Theme('assets/css-files/dark-mode.css'),
-  redmode: new Theme('assets/css-files/red-mode.css'),
-};
-
-Object.keys(themes).forEach(key => {
-  const theme = themes[key];
-  const el = document.getElementById(key);
-
-  el.addEventListener('click', () => switchTheme(key, el));
-});
-
-function switchTheme(key, elClicked) {
-  Object.keys(themes).forEach(k => {
-    themes[k].active = false;
-    const div = document.getElementById(k);
-    div.style.backgroundColor = '';
-  });
-
-  themes[key].active = true;
-  elClicked.style.backgroundColor = 'lightgreen';
-
-  const link = document.getElementById('themeColors');
-  link.setAttribute('href', themes[key].cssFile);
-}
 // Laad voortgang zodra script geladen is:
 loadProgress();
 updateCounter();
