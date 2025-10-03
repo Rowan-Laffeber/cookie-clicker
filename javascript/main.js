@@ -128,7 +128,7 @@ const container = document.getElementById("botContainer");
 
 const centerX = container.clientWidth / 2;
 const centerY = container.clientHeight / 2;
-const moveSpeed = emToPx(0.2);
+const moveSpeed = emToPx(0.4);
 
 class Bot {
   spotIndex;
@@ -344,7 +344,7 @@ function endChallenge(success) {
 
 document.getElementById("startChallengeBtn").addEventListener("click", startChallenge);
 
-//theme-switcher
+// theme-switcher
 class Theme {
   cssFile;
   active;
@@ -361,6 +361,10 @@ const themes = {
   redmode: new Theme('assets/css-files/red-mode.css'),
 };
 
+let transitionsEnabled = false;
+
+
+
 Object.keys(themes).forEach(key => {
   const theme = themes[key];
   const el = document.getElementById(key);
@@ -368,7 +372,15 @@ Object.keys(themes).forEach(key => {
   el.addEventListener('click', () => switchTheme(key, el));
 });
 
+function enableTransitions() {
+  if (!transitionsEnabled) {
+    document.body.classList.add('transition-enabled');
+    transitionsEnabled = true;
+  }
+}
+
 function switchTheme(key, elClicked) {
+
   Object.keys(themes).forEach(k => {
     themes[k].active = false;
     const div = document.getElementById(k);
@@ -381,6 +393,8 @@ function switchTheme(key, elClicked) {
   const link = document.getElementById('themeColors');
   link.setAttribute('href', themes[key].cssFile);
 }
+
+
 
 // === SAVE / LOAD ===
 
@@ -438,6 +452,9 @@ function loadProgress() {
     const el = document.getElementById(savedTheme);
     switchTheme(savedTheme, el);
   }
+  window.onload = () => {
+    enableTransitions();
+  };
 }
 
 // Laad voortgang zodra script geladen is:
@@ -445,33 +462,34 @@ loadProgress();
 updateCounter();
 
 //test class voor oefenen
-class Enemy {
+class Character{
   health;
-  constructor(health) {
-    const savedHealth = localStorage.getItem('enemyHealth');
-    this.health = savedHealth !== null ? Number(savedHealth) : health;
+  hitpoints;
+  constructor(health, hitpoints){
+    this.health = health;
+    this.hitpoints = hitpoints;
   }
-  takeDamage(amount) {
-    this.health -= amount;
-    if (this.health < 0) this.health = 0;
 
-    localStorage.setItem('enemyHealth', this.health);
-
-    console.log(`Enemy took ${amount} damage, health now: ${this.health}`);
-  }
+}
+class Enemy extends Character {
+  level;
+    constructor(health, hitpoints, level){
+      super(health, hitpoints);
+      this.level = level;
+    }
 }
 
-class Player {
-  constructor(damage) {
-    this.damage = damage;
-  }
+class Player extends Character {
+ gold;
 
-  giveDamage(enemy) {
-    enemy.takeDamage(this.damage);
-  }
+ constructor(health, hitpoints, gold){
+  super(health, hitpoints);
+  this.gold = gold;
+ }
+
 }
 
-const enemy = new Enemy(100);
-const player = new Player(2);
-
-player.giveDamage(enemy);
+const vijand = new Enemy(100, 2, 5);
+const speler = new Player(200, 5, 1000);
+console.log(vijand);
+console.log(speler);

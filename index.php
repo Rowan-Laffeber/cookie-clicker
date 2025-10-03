@@ -34,7 +34,7 @@
                 <img src="assets/pictures/Cookie.png" alt="cookie">
                 <p>theme 5</p>
             </div>
-        </div>
+        </div>  
     </div>
     <div class="cookieNcounter">
         <p class="counter" id="counter">0</p>
