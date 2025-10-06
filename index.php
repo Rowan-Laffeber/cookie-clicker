@@ -39,7 +39,8 @@
     <div class="cookieNcounter">
         <p class="counter" id="counter">0</p>
         <div class="container" id="botContainer">
-            <img class="cookie" id="cookie" src="assets/pictures/Cookie.png" alt="cookie" />
+            <img class="beams" id="beams" src="assets/pictures/lightBeams.png" alt="beams">
+            <img class="cookie" id="cookie" src="assets/pictures/Cookie.png" alt="cookie">
         </div>
     </div>
     <div class="sidemenus">

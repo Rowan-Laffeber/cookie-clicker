@@ -457,6 +457,21 @@ function loadProgress() {
   };
 }
 
+
+// make the lightbeams spin
+const img = document.getElementById('beams');
+let angle = 0;
+let spinning = true;
+
+function spin() {
+  if (!spinning) return;
+  angle = (angle + 0.25) % 360; // increase angle, speed can be changed here
+  img.style.transform = `rotate(${angle}deg)`;
+  requestAnimationFrame(spin);
+}
+
+spin();
+
 // Laad voortgang zodra script geladen is:
 loadProgress();
 updateCounter();

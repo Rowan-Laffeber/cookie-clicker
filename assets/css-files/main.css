@@ -129,6 +129,13 @@ body {
   font-size: 1em;
   width: 21.75em;
 }
+.beams{
+  position: absolute;
+  left: -8em;
+  top: -8em;
+  width: 48em;
+  height: 48em;
+}
 
 body.challenge-active #cookie {
   border: 3px solid red;
