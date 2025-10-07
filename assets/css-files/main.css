@@ -137,6 +137,17 @@ body {
   height: 48em;
 }
 
+.dropdown-content{
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  transition: max-height 0.3s ease;
+}
+.dropdown-content.show{
+  max-height: 22em;
+  overflow: auto;
+}
+
 body.challenge-active #cookie {
   border: 3px solid red;
   animation: pulse 1s infinite;

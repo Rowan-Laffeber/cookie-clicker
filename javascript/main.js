@@ -128,7 +128,7 @@ const container = document.getElementById("botContainer");
 
 const centerX = container.clientWidth / 2;
 const centerY = container.clientHeight / 2;
-const moveSpeed = emToPx(0.4);
+const moveSpeed = emToPx(0.3);
 
 class Bot {
   spotIndex;
@@ -471,6 +471,43 @@ function spin() {
 }
 
 spin();
+
+//dropdown functionality
+class DropdownSidebar {
+  container;
+  headers;
+  contents;
+
+  constructor(containerSelector) {
+    this.container = document.querySelector(containerSelector);
+    this.headers = this.container.querySelectorAll('.side-header');
+    this.contents = this.container.querySelectorAll('.dropdown-content');
+
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    this.headers.forEach(header => {
+      header.addEventListener('click', () => this.toggle(header));
+    });
+  }
+
+  toggle(header) {
+    const content = header.nextElementSibling;
+
+    this.contents.forEach(c => {
+      if (c !== content) {
+        c.classList.remove('show');
+      }
+    });
+
+    content.classList.toggle('show');
+  }
+}
+document.querySelectorAll('.sidemenus').forEach(sidebar => {
+  new DropdownSidebar(`#${sidebar.id}`);
+});
+
 
 // Laad voortgang zodra script geladen is:
 loadProgress();
