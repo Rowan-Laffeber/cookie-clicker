@@ -508,6 +508,29 @@ document.querySelectorAll('.sidemenus').forEach(sidebar => {
   new DropdownSidebar(`#${sidebar.id}`);
 });
 
+//falling cookies
+class FallingCookies{
+  size;
+  position;
+  velocity;
+  spinSpeed;
+  startingAngle;
+  //needs expanding!!!
+}
+//floating +numbers
+class NumberClicks{
+  count;
+  floatUpSpeed;
+  fadeOutSpeed;
+  constructor(count, floatUpSpeed = 30, fadeOutSpeed =  2000){
+    this.count = cookiesPerClick;
+    this.floatUpSpeed = floatUpSpeed;
+    this.fadeOutSpeed = fadeOutSpeed;
+
+  }
+  //needs expanding!!!
+}
+
 
 // Laad voortgang zodra script geladen is:
 loadProgress();
