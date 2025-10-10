@@ -80,7 +80,7 @@ body {
   font-size: 1.5em;
 }
 
-.upgrades, .bots {
+.upgrades, .bots .skins{
   display: grid;
   grid-template-areas:
     'a b c d'
@@ -91,7 +91,7 @@ body {
   padding: 1em;
 }
 
-.upgrades img, .bots img {
+.upgrades img, .bots img, .skins img{
   width: 6em;
   height: auto;
   border-width: 0.125em;
@@ -151,6 +151,11 @@ body {
 body.challenge-active #cookie {
   border: 3px solid red;
   animation: pulse 1s infinite;
+}
+
+.skin_text:hover{
+  font-size: 2em;
+  pointer-events: visible;
 }
 
 @keyframes pulse {

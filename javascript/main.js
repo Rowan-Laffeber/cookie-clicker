@@ -545,3 +545,31 @@ const vijand = new Enemy(100, 2, 5);
 const speler = new Player(200, 5, 1000);
 console.log(vijand);
 console.log(speler);
+
+class Skins{
+  name;
+  cost;
+
+  constructor(name, cost) {
+    this.name = name
+    this.cost = cost
+  }
+
+}
+
+class Pinata extends Skins{
+  constructor(name,cost) {
+    super(name,cost);
+  }
+}
+
+class Pimp extends Skins{
+  constructor(name,cost) {
+    super(name,cost);
+  }
+}
+
+let skin_1 = new Pinata("rex", 5000)
+let skin_2 = new Pimp("box", 10000)
+
+
