@@ -31,7 +31,13 @@ function updateCounter() {
   saveProgress();
 }
 
-function cookieClicked() {
+function cookieClicked(e) {
+  const number = new NumberClicks(cookiesPerClick);
+  const x = e.pageX;
+  const y = e.pageY;
+
+  number.spawnNumber(x, y);
+
   if (isChallengeActive) {
     challengeClicks++;
     updateChallengeUI();
@@ -522,13 +528,39 @@ class NumberClicks{
   count;
   floatUpSpeed;
   fadeOutSpeed;
-  constructor(count, floatUpSpeed = 30, fadeOutSpeed =  2000){
+  constructor(count, floatUpSpeed = 50, fadeOutSpeed =  1500){
     this.count = cookiesPerClick;
     this.floatUpSpeed = floatUpSpeed;
     this.fadeOutSpeed = fadeOutSpeed;
 
   }
-  //needs expanding!!!
+  //spawn p tag
+  spawnNumber(x, y) {
+    const p = document.createElement("p");
+    p.textContent = `+${this.count}`;
+
+    //p tag
+    p.style.position = "absolute";
+    p.style.left = `${x}px`;
+    p.style.top = `${y}px`;
+    p.style.fontSize = "20px";
+    p.style.fontWeight = "bold";
+    p.style.color = "white";
+    p.style.pointerEvents = "none";
+    p.style.opacity = "1";
+    p.style.zIndex = "1000";
+    p.style.transition = `transform ${this.fadeOutSpeed}ms ease-out, opacity ${this.fadeOutSpeed}ms ease-out`;
+
+    document.body.appendChild(p);
+
+    requestAnimationFrame(() => {
+      p.style.transform = `translateY(-${this.floatUpSpeed}px)`;
+      p.style.opacity = "0";
+    });
+    setTimeout(() => {
+      p.remove();
+    }, this.fadeOutSpeed);
+  }
 }
 
 
