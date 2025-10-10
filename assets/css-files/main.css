@@ -72,6 +72,7 @@ body {
   display: flex;
   justify-content: center;
   padding-top: 1em;
+  cursor: pointer;
 }
 
 .sidemenus .side-header p {
@@ -96,6 +97,7 @@ body {
   height: auto;
   border-width: 0.125em;
   border-style: solid;
+  cursor: pointer;
 }
 
 .item1 { grid-area: a; }
@@ -118,6 +120,7 @@ body {
   margin: 1em;
   border-width: 0.125em;
   border-style: solid;
+  cursor: pointer;
 }
 
 .themes div img {
