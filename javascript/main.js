@@ -32,11 +32,7 @@ function updateCounter() {
 }
 
 function cookieClicked(e) {
-  const number = new NumberClicks(cookiesPerClick);
-  const x = e.pageX;
-  const y = e.pageY;
 
-  number.spawnNumber(x, y);
 
   if (isChallengeActive) {
     challengeClicks++;
@@ -46,6 +42,23 @@ function cookieClicked(e) {
     }
   } else {
     cookieInstance.count += cookiesPerClick;
+
+    // const x = e.pageX;
+    // const y = e.pageY;
+
+    const rect = container.getBoundingClientRect();
+
+    // Convert page coordinates to container-relative coordinates
+    const x = e.pageX - (rect.left + window.scrollX);
+    const y = e.pageY - (rect.top + window.scrollY);
+    // Show floating number
+    const number = new NumberClicks(x, y, cookiesPerClick);
+    number.spawn();
+
+    // Show jumping cookie image
+    const jumpingCookie = new JumpingCookie(x, y, "assets/pictures/Cookie.png", 30);
+    jumpingCookie.spawn();
+
     updateCounter();
   }
 }
@@ -86,6 +99,7 @@ const upgrades = {
   '2x': new Upgrade(2, 10),
   '3x': new Upgrade(3, 30),
   '5x': new Upgrade(5, 100),
+  '10x': new Upgrade(10, 5000),
 };
 
 document.getElementById('2x-multiplier').addEventListener('click', function () {
@@ -98,6 +112,9 @@ document.getElementById('3x-multiplier').addEventListener('click', function () {
 
 document.getElementById('5x-multiplier').addEventListener('click', function () {
   buyMultiplier('5x', this);
+});
+document.getElementById('10x-multiplier').addEventListener('click', function () {
+  buyMultiplier('10x', this);
 });
 
 function buyMultiplier(key, buttonElement) {
@@ -523,45 +540,129 @@ class FallingCookies{
   startingAngle;
   //needs expanding!!!
 }
-//floating +numbers
-class NumberClicks{
-  count;
-  floatUpSpeed;
-  fadeOutSpeed;
-  constructor(count, floatUpSpeed = 50, fadeOutSpeed =  1500){
-    this.count = cookiesPerClick;
-    this.floatUpSpeed = floatUpSpeed;
-    this.fadeOutSpeed = fadeOutSpeed;
 
+//elements when clicking
+class FloatingElement {
+  constructor(x, y, fadeOutDuration = 1500) {
+    this.x = x;
+    this.y = y;
+    this.fadeOutDuration = fadeOutDuration;
+    this.element = null;
   }
-  //spawn p tag
-  spawnNumber(x, y) {
+
+  spawn() {
+    this.createElement();
+    document.getElementById('botContainer').appendChild(this.element);
+    // document.body.appendChild(this.element);  
+
+
+
+    this.element.style.position = "absolute";
+    this.element.style.left = `${this.x}px`;
+    this.element.style.top = `${this.y}px`;
+    this.element.style.pointerEvents = "none";
+    this.element.style.zIndex = "1000";
+    this.element.style.opacity = "1";
+  }
+}
+
+// Floating number
+class NumberClicks extends FloatingElement {
+  constructor(x, y, count, floatUpSpeed = 50, fadeOutDuration = 1500) {
+    super(x, y, fadeOutDuration);
+    this.count = count;
+    this.floatUpSpeed = floatUpSpeed;
+  }
+
+  createElement() {
     const p = document.createElement("p");
     p.textContent = `+${this.count}`;
-
-    //p tag
-    p.style.position = "absolute";
-    p.style.left = `${x}px`;
-    p.style.top = `${y}px`;
     p.style.fontSize = "20px";
     p.style.fontWeight = "bold";
     p.style.color = "white";
-    p.style.pointerEvents = "none";
-    p.style.opacity = "1";
-    p.style.zIndex = "1000";
-    p.style.transition = `transform ${this.fadeOutSpeed}ms ease-out, opacity ${this.fadeOutSpeed}ms ease-out`;
+    this.element = p;
+  }
 
-    document.body.appendChild(p);
+  spawn() {
+    super.spawn();
+
+    this.element.style.transition = `transform ${this.fadeOutDuration}ms ease-out, opacity ${this.fadeOutDuration}ms ease-out`;
 
     requestAnimationFrame(() => {
-      p.style.transform = `translateY(-${this.floatUpSpeed}px)`;
-      p.style.opacity = "0";
+      this.element.style.transform = `translateY(-${this.floatUpSpeed}px)`;
+      this.element.style.opacity = "0";
     });
+
     setTimeout(() => {
-      p.remove();
-    }, this.fadeOutSpeed);
+      this.element.remove();
+    }, this.fadeOutDuration);
   }
 }
+
+// Jumping cookie
+class JumpingCookie extends FloatingElement {
+  constructor(x, y, imageSrc = "cookie.png", size = 30, fadeOutDuration = 1500) {
+    super(x, y, fadeOutDuration);
+    this.imageSrc = imageSrc;
+    this.size = size;
+
+    this.vx = 0; // velocity x
+    this.vy = 0; // velocity y
+    this.gravity = 0.5; // gravity acceleration pixels/frame^2
+
+    this.startTime = null;
+    this.opacity = 1;
+  }
+
+  createElement() {
+    const img = document.createElement("img");
+    img.src = this.imageSrc;
+    img.style.width = `${this.size}px`;
+    img.style.height = `${this.size}px`;
+    this.element = img;
+  }
+
+  spawn() {
+    super.spawn();
+
+    // Random angle  60° - 120° (upwards)
+    const angleDeg = 60 + Math.random() * 60;
+    const angleRad = angleDeg * (Math.PI / 180);
+    const speed = 5 + Math.random() * 3;
+
+    this.vx = speed * Math.cos(angleRad);
+    this.vy = -speed * Math.sin(angleRad);
+
+    this.startTime = performance.now();
+
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
+  animate(timestamp) {
+    if (!this.startTime) this.startTime = timestamp;
+
+    const elapsed = timestamp - this.startTime;
+
+    this.vy += this.gravity;
+    this.x += this.vx;
+    this.y += this.vy;
+
+    this.opacity = 1 - elapsed / this.fadeOutDuration;
+    if (this.opacity < 0) this.opacity = 0;
+
+    this.element.style.left = `${this.x}px`;
+    this.element.style.top = `${this.y}px`;
+
+    this.element.style.opacity = this.opacity;
+
+    if (elapsed < this.fadeOutDuration) {
+      requestAnimationFrame(this.animate.bind(this));
+    } else {
+      this.element.remove();
+    }
+  }
+}
+
 
 
 // Laad voortgang zodra script geladen is:

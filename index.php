@@ -64,7 +64,7 @@
                 <img id="2x-multiplier" class="item1" src="assets/pictures/2x_upgrade.png" alt="">
                 <img id="3x-multiplier" class="item2" src="assets/pictures/Cookie.png" alt="">
                 <img id="5x-multiplier" class="item3" src="assets/pictures/Cookie.png" alt="">
-                <img class="item4" src="assets/pictures/Cookie.png" alt="">
+                <img id="10x-multiplier" class="item4" src="assets/pictures/Cookie.png" alt="">
                 <img class="item5" src="assets/pictures/Cookie.png" alt="">
                 <img class="item6" src="assets/pictures/Cookie.png" alt="">
                 <img class="item7" src="assets/pictures/Cookie.png" alt="">
