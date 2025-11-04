@@ -422,7 +422,8 @@ function saveProgress() {
   const progress = {
     count: cookieInstance.count,
     cookiesPerClick: cookiesPerClick,
-    upgrades: {},
+    upgrades:{},
+    skins:{},
     botsPerRing: rings.map(ring => ring.bots.length),
     activeTheme: Object.keys(themes).find(key => themes[key].active) || 'lightmode'
   };
@@ -430,6 +431,9 @@ function saveProgress() {
   for (const key in upgrades) {
     progress.upgrades[key] = upgrades[key].active;
   }
+  // for (const key in skins) {
+  // progress.skins[key] = skins[key].owned;
+  // }
 
   localStorage.setItem('cookieClickerProgress', JSON.stringify(progress));
 }
@@ -680,7 +684,8 @@ class Skin{
 }
 const skins = {
   'chain': new Skin("assets/pictures/pimp.png", 10000),
-  'pinata': new Skin("assets/pictures/pinata.png", 8000)
+  'pinata': new Skin("assets/pictures/pinata.png", 8000),
+  'dropCookie': new Skin("assets/pictures/Cookie.png", 0),
 };
 
 document.getElementById('chain').addEventListener('click', function () {
@@ -691,17 +696,24 @@ document.getElementById('pinata').addEventListener('click', function () {
   changeSkin('pinata', this);
 });
 
-function changeSkin(key){
+document.getElementById('dropCookie').addEventListener('click', function () {
+  changeSkin('dropCookie', this);
+});
+
+function changeSkin(key, skinButton){
   const skin = skins[key];
   if (skin.owned === false){
     if (cookieInstance.count >= skin.cost) {
       cookieInstance.count -= skin.cost
       skin.owned = true;
+      skinButton.style.backgroundColor = 'lightgreen';
     } else return;
   }
 
   document.getElementById('cookie').src = skin.name;
   skin.active = true;
+
+  saveProgress();
 
 }
 
