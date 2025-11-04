@@ -81,7 +81,7 @@ body {
   font-size: 1.5em;
 }
 
-.upgrades, .bots .skins{
+.upgrades, .bots, .skins{
   display: grid;
   grid-template-areas:
     'a b c d'
@@ -110,22 +110,28 @@ body {
 .item8 { grid-area: h; }
 .item9 { grid-area: i; }
 
-.themes {
+.themes, .botspace {
   width: 30em;
 }
 
-.themes div {
+.themes div, .botSpace div {
   display: flex;
   max-width: 28em;
   margin: 1em;
   border-width: 0.125em;
   border-style: solid;
+}
+.themes div{
   cursor: pointer;
 }
 
 .themes div img {
   width: 6em;
   height: auto;
+}
+.botSpace div img{
+  width: 28em;
+  height: 6em;
 }
 
 .themes div p {

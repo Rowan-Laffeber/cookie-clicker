@@ -26,7 +26,7 @@ body {
   
 }
 
-.themes div {
+.themes div, .botSpace div {
   border-color: white;
   color: white;
 }

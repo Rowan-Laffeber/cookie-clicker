@@ -43,9 +43,6 @@ function cookieClicked(e) {
   } else {
     cookieInstance.count += cookiesPerClick;
 
-    // const x = e.pageX;
-    // const y = e.pageY;
-
     const rect = container.getBoundingClientRect();
 
     // Convert page coordinates to container-relative coordinates
@@ -488,14 +485,14 @@ let spinning = true;
 
 function spin() {
   if (!spinning) return;
-  angle = (angle + 0.25) % 360; // increase angle, speed can be changed here
+  angle = (angle + 0.25) % 360; // increasing angle = increase spinning speed
   img.style.transform = `rotate(${angle}deg)`;
   requestAnimationFrame(spin);
 }
 
 spin();
 
-//dropdown functionality
+//dropdown
 class DropdownSidebar {
   container;
   headers;
@@ -553,9 +550,6 @@ class FloatingElement {
   spawn() {
     this.createElement();
     document.getElementById('botContainer').appendChild(this.element);
-    // document.body.appendChild(this.element);  
-
-
 
     this.element.style.position = "absolute";
     this.element.style.left = `${this.x}px`;
@@ -660,7 +654,7 @@ class JumpingCookie extends FloatingElement {
     } else {
       this.element.remove();
     }
-  }
+  }  
 }
 
 

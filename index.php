@@ -11,8 +11,26 @@
 <body>
     <div class="sidemenus" id="sidemenu1">
         <div class="dropdown">
+        <?php 
+                // class Player{
+                //     public $name;
+                //     public int $health;
+                //     public int $size;
+                //     function __construct($name, $health, $size) {
+                //         $this->name = $name;
+                //         $this->health = $health;
+                //         $this->size = $size;
+                //       }
+                //       function get_health() {
+                //         return $this->health;
+                //       }
+                // }
+                // $warlord420 = new player("warlord420", 100, 20);
+                // echo $warlord420->get_health();
+                // echo var_dump($warlord420)
+                ?>
             <div class="side-header">
-                <p>themes</p>
+                <p>themes</p> 
             </div>
             <div class="dropdown-content themes">
                 <div id="lightmode">
@@ -47,6 +65,34 @@
                 <button onclick=""><img class="dropCookie" id="dropCookie" src="assets/pictures/Cookie.png" alt="cookie"></button>
             </div>
         </div>
+        <div class="dropdown">
+            <div class="side-header">
+                <p>botSpace</p>
+            </div>
+            <div class="dropdown-content botSpace">
+                <div>
+                    <img id="botSpace1" src="assets/pictures/bot.png" alt="">
+                </div>
+                <div>
+                    <img id="botSpace2" src="assets/pictures/bot.png" alt="">
+                </div>
+                <div>
+                    <img id="botSpace3" src="assets/pictures/bot.png" alt="">
+                </div>
+                <div>
+                    <img id="botSpace4" src="assets/pictures/bot.png" alt="">
+                </div>
+                <div>
+                    <img id="botSpace5" src="assets/pictures/bot.png" alt="">
+                </div>
+                <div>
+                    <img id="botSpace6" src="assets/pictures/bot.png" alt="">
+                </div>
+                <div>
+                    <img id="botSpace7" src="assets/pictures/bot.png" alt="">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="cookieNcounter">
         <p class="counter" id="counter">0</p>
@@ -76,12 +122,16 @@
                 <p>bots</p>
             </div>
             <div class="dropdown-content bots">
-                <img id="addBotBtn" src="assets/pictures/bot.png" alt="">
+                <img id="addBotBtn" src="assets/pictures/cursor.png" alt="">
+                <img id="bot1" src="assets/pictures/bot.png" alt="">
+                <img id="bot2" src="assets/pictures/bot.png" alt="">
+                <img id="bot3" src="assets/pictures/bot.png" alt="">
+                <img id="bot4" src="assets/pictures/bot.png" alt="">
+                <img id="bot5" src="assets/pictures/bot.png" alt="">
+                <img id="bot6" src="assets/pictures/bot.png" alt="">
+                <img id="bot7" src="assets/pictures/bot.png" alt="">
             </div>
         </div>
-
-
-
         <div class="dropdown">
             <div class="side-header">
                 <p>challenges</p>
