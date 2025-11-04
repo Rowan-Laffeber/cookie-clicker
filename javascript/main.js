@@ -663,63 +663,53 @@ class JumpingCookie extends FloatingElement {
 loadProgress();
 updateCounter();
 
-//test class voor oefenen
-class Character{
-  health;
-  hitpoints;
-  constructor(health, hitpoints){
-    this.health = health;
-    this.hitpoints = hitpoints;
-  }
 
-}
-class Enemy extends Character {
-  level;
-    constructor(health, hitpoints, level){
-      super(health, hitpoints);
-      this.level = level;
-    }
-}
 
-class Player extends Character {
- gold;
-
- constructor(health, hitpoints, gold){
-  super(health, hitpoints);
-  this.gold = gold;
- }
-
-}
-
-const vijand = new Enemy(100, 2, 5);
-const speler = new Player(200, 5, 1000);
-console.log(vijand);
-console.log(speler);
-
-class Skins{
+class Skin{
   name;
   cost;
+  active;
+  owned;
 
   constructor(name, cost) {
     this.name = name
     this.cost = cost
+    this.active = false;
+    this.owned = false;
   }
+}
+const skins = {
+  'chain': new Skin("assets/pictures/pimp.jpeg", 10000),
+  'pinata': new Skin("assets/pictures/pinata.jpeg", 8000)
+};
+
+document.getElementById('chain').addEventListener('click', function () {
+  changeSkin('chain', this);
+});
+
+document.getElementById('pinata').addEventListener('click', function () {
+  changeSkin('pinata', this);
+});
+
+function changeSkin(key){
+  const skin = skins[key];
+  if (skin.owned === false){
+    if (cookieInstance.count >= skin.cost) {
+      cookieInstance.count -= skin.cost
+      skin.owned = true;
+    } else return;
+  }
+
+  document.getElementById('cookie').src = skin.name;
+  skin.active = true;
 
 }
 
-class Pinata extends Skins{
-  constructor(name,cost) {
-    super(name,cost);
-  }
-}
 
-class Pimp extends Skins{
-  constructor(name,cost) {
-    super(name,cost);
-  }
-}
 
-let skin_1 = new Pinata("rex", 5000)
-let skin_2 = new Pimp("box", 10000)
+
+
+
+
 
 

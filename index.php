@@ -59,9 +59,9 @@
             <div class="side-header">
                 <p class="skin_text">skins</p>
             </div>
-            <div class="dropdown-content skins">
+            <div class="dropdown-content skins" id="dropdownSkins">
                 <button onclick=""><img class="pinata" id="pinata" src="assets/pictures/pinata.jpeg" alt="a pinata"></button>
-                <button onclick=""><img class="goldChain" id="goldChain" src="assets/pictures/pimp.jpeg" alt="black piggy bank with gold chain"></button>
+                <button onclick=""><img class="goldChain" id="chain" src="assets/pictures/pimp.jpeg" alt="black piggy bank with gold chain"></button>
                 <button onclick=""><img class="dropCookie" id="dropCookie" src="assets/pictures/Cookie.png" alt="cookie"></button>
             </div>
         </div>
@@ -149,3 +149,15 @@
 </body>
 <script src="javascript/main.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
