@@ -679,8 +679,8 @@ class Skin{
   }
 }
 const skins = {
-  'chain': new Skin("assets/pictures/pimp.jpeg", 10000),
-  'pinata': new Skin("assets/pictures/pinata.jpeg", 8000)
+  'chain': new Skin("assets/pictures/pimp.png", 10000),
+  'pinata': new Skin("assets/pictures/pinata.png", 8000)
 };
 
 document.getElementById('chain').addEventListener('click', function () {

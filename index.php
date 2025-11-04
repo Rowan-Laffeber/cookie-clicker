@@ -59,10 +59,10 @@
             <div class="side-header">
                 <p class="skin_text">skins</p>
             </div>
-            <div class="dropdown-content skins" id="dropdownSkins">
-                <button onclick=""><img class="pinata" id="pinata" src="assets/pictures/pinata.jpeg" alt="a pinata"></button>
-                <button onclick=""><img class="goldChain" id="chain" src="assets/pictures/pimp.jpeg" alt="black piggy bank with gold chain"></button>
-                <button onclick=""><img class="dropCookie" id="dropCookie" src="assets/pictures/Cookie.png" alt="cookie"></button>
+            <div class="dropdown-content skins">
+                <img class="pinata" id="pinata" src="assets/pictures/pinata.png" alt="a pinata">
+                <img class="goldChain" id="chain" src="assets/pictures/pimp.png" alt="black piggy bank with gold chain">
+                <img class="dropCookie" id="dropCookie" src="assets/pictures/Cookie.png" alt="cookie">
             </div>
         </div>
         <div class="dropdown">
