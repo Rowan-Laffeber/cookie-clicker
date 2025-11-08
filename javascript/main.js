@@ -290,6 +290,112 @@ function addBot() {
 
 document.getElementById("addBotBtn").addEventListener("click", addBot);
 
+// ===== BotSpace Class =====
+class BotSpace {
+    constructor(el, type = "default") {
+        this.el = el;
+        this.type = type;
+        this.bots = [];
+        this.maxBots = 7;
+    }
+
+    spawnBot(botType) {
+        if (this.bots.length >= this.maxBots) {
+            alert("This BotSpace is full!");
+            return false;
+        }
+
+        if (cookieInstance.count < botType.cost) {
+            alert("Not enough cookies!");
+            return false;
+        }
+
+        const bot = new BannerBot(botType, this);
+        this.bots.push(bot);
+        cookieInstance.count -= botType.cost;
+        updateCounter();
+        return true;
+        
+    }
+}
+
+
+// ===== BannerBot Class =====
+class BannerBot {
+    constructor(botType, botSpace) {
+        this.type = botType;
+        this.botSpace = botSpace;
+        this.cookiesPerTick = botType.cookiesPerTick;
+
+        // Create bot DOM element
+        this.el = document.createElement('img');
+        this.el.src = botType.image;
+        this.el.style.width = "50px";
+        this.el.style.height = "50px";
+        this.el.style.position = "absolute";
+        this.el.style.bottom = "0";
+        this.el.style.left = `${10 + botSpace.bots.length * 55}px`; // stagger bots horizontally
+        this.el.style.transform = "translateX(0)";
+
+        // Attach bot to the banner slot
+        botSpace.el.appendChild(this.el);
+
+        // Track globally for cookie production
+        BannerBot.allBots.push(this);
+    }
+
+    produceCookies() {
+        cookieInstance.count += this.cookiesPerTick;
+        updateCounter();
+    }
+}
+
+// ===== Static global array to track all BannerBots =====
+BannerBot.allBots = [];
+
+// ===== Cookie production tick =====
+setInterval(() => {
+    BannerBot.allBots.forEach(bot => bot.produceCookies());
+}, 1000);
+
+// ===== Bot Types =====
+const botTypes = {
+    grandma: { name: "Grandma", image: "assets/pictures/emoji.png", cookiesPerTick: 1, cost: 50 },
+    farm: { name: "Farm", image: "assets/pictures/emoji.png", cookiesPerTick: 5, cost: 100 },
+    factory: { name: "Factory", image: "assets/pictures/emoji.png", cookiesPerTick: 10, cost: 200 },
+    bakery: { name: "Bakery", image: "assets/pictures/emoji.png", cookiesPerTick: 20, cost: 400 },
+    candyShop: { name: "Candy Shop", image: "assets/pictures/emoji.png", cookiesPerTick: 30, cost: 600 },
+    chocolateFactory: { name: "Chocolate Factory", image: "assets/pictures/emoji.png", cookiesPerTick: 50, cost: 1000 },
+    cookieEmpire: { name: "Cookie Empire", image: "assets/pictures/emoji.png", cookiesPerTick: 100, cost: 2000 }
+};
+
+// ===== Initialize BotSpaces (banner slots) =====
+const botSpaceIds = ["botSpace1", "botSpace2", "botSpace3", "botSpace4", "botSpace5", "botSpace6", "botSpace7"];
+const botSpaces = botSpaceIds.map(id => new BotSpace(document.getElementById(id)));
+
+// ===== Map buttons to bot types =====
+const buttonBotMap = {
+    bot1: botTypes.grandma,
+    bot2: botTypes.farm,
+    bot3: botTypes.factory,
+    bot4: botTypes.bakery,
+    bot5: botTypes.candyShop,
+    bot6: botTypes.chocolateFactory,
+    bot7: botTypes.cookieEmpire
+};
+
+// ===== Setup purchase buttons =====
+botSpaces.forEach((botSpace, index) => {
+    const buttonId = `bot${index + 1}`;
+    const button = document.getElementById(buttonId);
+    if (!button) return;
+
+    button.addEventListener('click', () => {
+        const botType = buttonBotMap[buttonId];
+        botSpace.spawnBot(botType);
+    });
+});
+
 // === CHALLENGE FUNCTIONS ===
 
 function startChallenge() {
@@ -425,6 +531,7 @@ function saveProgress() {
     upgrades:{},
     skins:{},
     botsPerRing: rings.map(ring => ring.bots.length),
+    botsPerBanner: botSpaces.map(botSpace => botSpace.bots.length),
     activeTheme: Object.keys(themes).find(key => themes[key].active) || 'lightmode'
   };
 
@@ -461,6 +568,16 @@ function loadProgress() {
     progress.botsPerRing.forEach((count, index) => {
       for (let i = 0; i < count; i++) {
         rings[index].addBot();
+      }
+    });
+  }
+
+  if (progress.botsPerBanner) {
+    progress.botsPerBanner.forEach((count, index) => {
+      const botSpace = botSpaces[index];
+      const botType = Object.values(botTypes)[0]; // fallback, can improve later
+      for (let i = 0; i < count; i++) {
+        botSpace.spawnBot(botType);
       }
     });
   }

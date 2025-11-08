@@ -70,26 +70,26 @@
                 <p>botSpace</p>
             </div>
             <div class="dropdown-content botSpace">
-                <div>
-                    <img id="botSpace1" src="assets/pictures/landscapeBanner.png" alt="">
+                <div id="botSpace1">
+                    <img  src="assets/pictures/landscapeBanner.png" alt="">
                 </div>
-                <div>
-                    <img id="botSpace2" src="assets/pictures/bot.png" alt="">
+                <div id="botSpace2">
+                    <img  src="assets/pictures/bot.png" alt="">
                 </div>
-                <div>
-                    <img id="botSpace3" src="assets/pictures/bot.png" alt="">
+                <div id="botSpace3">
+                    <img  src="assets/pictures/bot.png" alt="">
                 </div>
-                <div>
-                    <img id="botSpace4" src="assets/pictures/bot.png" alt="">
+                <div id="botSpace4">
+                    <img  src="assets/pictures/bot.png" alt="">
                 </div>
-                <div>
-                    <img id="botSpace5" src="assets/pictures/bot.png" alt="">
+                <div id="botSpace5">
+                    <img  src="assets/pictures/bot.png" alt="">
                 </div>
-                <div>
-                    <img id="botSpace6" src="assets/pictures/bot.png" alt="">
+                <div id="botSpace6">
+                    <img  src="assets/pictures/bot.png" alt="">
                 </div>
-                <div>
-                    <img id="botSpace7" src="assets/pictures/bot.png" alt="">
+                <div id="botSpace7">
+                    <img  src="assets/pictures/bot.png" alt="">
                 </div>
             </div>
         </div>
