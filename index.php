@@ -71,7 +71,7 @@
             </div>
             <div class="dropdown-content botSpace">
                 <div>
-                    <img id="botSpace1" src="assets/pictures/bot.png" alt="">
+                    <img id="botSpace1" src="assets/pictures/landscapeBanner.png" alt="">
                 </div>
                 <div>
                     <img id="botSpace2" src="assets/pictures/bot.png" alt="">
@@ -123,7 +123,7 @@
             </div>
             <div class="dropdown-content bots">
                 <img id="addBotBtn" src="assets/pictures/cursor.png" alt="">
-                <img id="bot1" src="assets/pictures/bot.png" alt="">
+                <img id="bot1" src="assets/pictures/emoji.png" alt="">
                 <img id="bot2" src="assets/pictures/bot.png" alt="">
                 <img id="bot3" src="assets/pictures/bot.png" alt="">
                 <img id="bot4" src="assets/pictures/bot.png" alt="">
