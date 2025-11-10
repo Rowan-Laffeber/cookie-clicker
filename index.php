@@ -123,13 +123,13 @@
             </div>
             <div class="dropdown-content bots">
                 <img id="addBotBtn" src="assets/pictures/cursor.png" alt="">
-                <img id="bot1" src="assets/pictures/emoji.png" alt="">
-                <img id="bot2" src="assets/pictures/bot.png" alt="">
-                <img id="bot3" src="assets/pictures/bot.png" alt="">
-                <img id="bot4" src="assets/pictures/bot.png" alt="">
-                <img id="bot5" src="assets/pictures/bot.png" alt="">
-                <img id="bot6" src="assets/pictures/bot.png" alt="">
-                <img id="bot7" src="assets/pictures/bot.png" alt="">
+                <img id="bot1" src="assets/pictures/emojiHappy.png" alt="">
+                <img id="bot2" src="assets/pictures/emojiHands.png" alt="">
+                <img id="bot3" src="assets/pictures/emojiThink.png" alt="">
+                <img id="bot4" src="assets/pictures/emojiTongue.png" alt="">
+                <img id="bot5" src="assets/pictures/emojiOops.png" alt="">
+                <img id="bot6" src="assets/pictures/emojiDerp.png" alt="">
+                <img id="bot7" src="assets/pictures/emojiStar.png" alt="">
             </div>
         </div>
         <div class="dropdown">

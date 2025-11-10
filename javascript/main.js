@@ -1,3 +1,4 @@
+// localStorage. clear()
 class Cookie {
   count;
 
@@ -360,13 +361,13 @@ setInterval(() => {
 
 // ===== Bot Types =====
 const botTypes = {
-    grandma: { name: "Grandma", image: "assets/pictures/emoji.png", cookiesPerTick: 1, cost: 50 },
-    farm: { name: "Farm", image: "assets/pictures/emoji.png", cookiesPerTick: 5, cost: 100 },
-    factory: { name: "Factory", image: "assets/pictures/emoji.png", cookiesPerTick: 10, cost: 200 },
-    bakery: { name: "Bakery", image: "assets/pictures/emoji.png", cookiesPerTick: 20, cost: 400 },
-    candyShop: { name: "Candy Shop", image: "assets/pictures/emoji.png", cookiesPerTick: 30, cost: 600 },
-    chocolateFactory: { name: "Chocolate Factory", image: "assets/pictures/emoji.png", cookiesPerTick: 50, cost: 1000 },
-    cookieEmpire: { name: "Cookie Empire", image: "assets/pictures/emoji.png", cookiesPerTick: 100, cost: 2000 }
+    emojiHappy: { name: "emojiHappy", image: "assets/pictures/emojiHappy.png", cookiesPerTick: 1, cost: 50 },
+    emojiHands: { name: "emojiHands", image: "assets/pictures/emojiHands.png", cookiesPerTick: 5, cost: 100 },
+    emojiThink: { name: "emojiThink", image: "assets/pictures/emojiThink.png", cookiesPerTick: 10, cost: 200 },
+    emojiTongue: { name: "emojiTongue", image: "assets/pictures/emojiTongue.png", cookiesPerTick: 20, cost: 400 },
+    emojiOops: { name: "emojiOops", image: "assets/pictures/emojiOops.png", cookiesPerTick: 30, cost: 600 },
+    emojiDerp: { name: "emojiDerp", image: "assets/pictures/emojiDerp.png", cookiesPerTick: 50, cost: 1000 },
+    emojiStar: { name: "emojiStar", image: "assets/pictures/emojiStar.png", cookiesPerTick: 100, cost: 2000 }
 };
 
 // ===== Initialize BotSpaces (banner slots) =====
@@ -375,13 +376,13 @@ const botSpaces = botSpaceIds.map(id => new BotSpace(document.getElementById(id)
 
 // ===== Map buttons to bot types =====
 const buttonBotMap = {
-    bot1: botTypes.grandma,
-    bot2: botTypes.farm,
-    bot3: botTypes.factory,
-    bot4: botTypes.bakery,
-    bot5: botTypes.candyShop,
-    bot6: botTypes.chocolateFactory,
-    bot7: botTypes.cookieEmpire
+    bot1: botTypes.emojiHappy,
+    bot2: botTypes.emojiHands,
+    bot3: botTypes.emojiThink,
+    bot4: botTypes.emojiTongue,
+    bot5: botTypes.emojiOops,
+    bot6: botTypes.emojiDerp,
+    bot7: botTypes.emojiStar
 };
 
 // ===== Setup purchase buttons =====
