@@ -540,9 +540,9 @@ function saveProgress() {
         activeTheme: Object.keys(themes).find(key => themes[key].active) || 'lightmode'
     };
 
-    for (const key in upgrades) {
-        progress.upgrades[key] = upgrades[key].active;
-    }
+  for (const key in upgrades) {
+    progress.upgrades[key] = upgrades[key].active;
+  }
 
     localStorage.setItem('cookieClickerProgress', JSON.stringify(progress));
 }
@@ -566,13 +566,14 @@ function loadProgress() {
         }
     }
 
-    if (progress.botsPerRing) {
-        progress.botsPerRing.forEach((count, index) => {
-            for (let i = 0; i < count; i++) {
-                rings[index].addBot();
-            }
-        });
-    }
+
+  if (progress.botsPerRing) {
+    progress.botsPerRing.forEach((count, index) => {
+      for (let i = 0; i < count; i++) {
+        rings[index].addBot();
+      }
+    });
+  }
 
     if (progress.botsPerBanner) {
         progress.botsPerBanner.forEach((botNames, index) => {
@@ -837,6 +838,7 @@ function changeSkin(key, skinButton){
   skin.active = true;
 
   saveProgress();
+  loadProgress();
 
 }
 
