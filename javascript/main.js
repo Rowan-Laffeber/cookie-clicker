@@ -293,62 +293,65 @@ document.getElementById("addBotBtn").addEventListener("click", addBot);
 
 // ===== BotSpace Class =====
 class BotSpace {
-    constructor(el, type = "default") {
-        this.el = el;
-        this.type = type;
-        this.bots = [];
-        this.maxBots = 7;
-    }
+  constructor(el, type = "default") {
+      this.el = el;
+      this.type = type;
+      this.bots = [];
+      this.maxBots = 7;
+  }
 
-    spawnBot(botType) {
-        if (this.bots.length >= this.maxBots) {
-            alert("This BotSpace is full!");
-            return false;
-        }
+  spawnBot(botType, isRestore = false) {
+      if (this.bots.length >= this.maxBots) {
+          if (!isRestore) alert("This BotSpace is full!");
+          return false;
+      }
 
-        if (cookieInstance.count < botType.cost) {
-            alert("Not enough cookies!");
-            return false;
-        }
+      if (!isRestore && cookieInstance.count < botType.cost) {
+          alert("Not enough cookies!");
+          return false;
+      }
 
-        const bot = new BannerBot(botType, this);
-        this.bots.push(bot);
-        cookieInstance.count -= botType.cost;
-        updateCounter();
-        return true;
-        
-    }
+      const bot = new BannerBot(botType, this);
+      this.bots.push(bot);
+
+      if (!isRestore) {
+          cookieInstance.count -= botType.cost;
+          updateCounter();
+      }
+
+      return true;
+  }
 }
 
 
 // ===== BannerBot Class =====
 class BannerBot {
-    constructor(botType, botSpace) {
-        this.type = botType;
-        this.botSpace = botSpace;
-        this.cookiesPerTick = botType.cookiesPerTick;
+  constructor(botType, botSpace) {
+      this.type = botType;
+      this.botSpace = botSpace;
+      this.cookiesPerTick = botType.cookiesPerTick;
 
-        // Create bot DOM element
-        this.el = document.createElement('img');
-        this.el.src = botType.image;
-        this.el.style.width = "50px";
-        this.el.style.height = "50px";
-        this.el.style.position = "absolute";
-        this.el.style.bottom = "0";
-        this.el.style.left = `${10 + botSpace.bots.length * 55}px`; // stagger bots horizontally
-        this.el.style.transform = "translateX(0)";
+      // Create bot DOM element
+      this.el = document.createElement('img');
+      this.el.src = botType.image;
+      this.el.style.width = "50px";
+      this.el.style.height = "50px";
+      this.el.style.position = "absolute";
+      this.el.style.bottom = "0";
+      this.el.style.left = `${10 + botSpace.bots.length * 55}px`; // stagger bots horizontally
+      this.el.style.transform = "translateX(0)";
 
-        // Attach bot to the banner slot
-        botSpace.el.appendChild(this.el);
+      // Attach bot to the banner slot
+      botSpace.el.appendChild(this.el);
 
-        // Track globally for cookie production
-        BannerBot.allBots.push(this);
-    }
+      // Track globally for cookie production
+      BannerBot.allBots.push(this);
+  }
 
-    produceCookies() {
-        cookieInstance.count += this.cookiesPerTick;
-        updateCounter();
-    }
+  produceCookies() {
+      cookieInstance.count += this.cookiesPerTick;
+      updateCounter();
+  }
 }
 
 // ===== Static global array to track all BannerBots =====
@@ -356,18 +359,18 @@ BannerBot.allBots = [];
 
 // ===== Cookie production tick =====
 setInterval(() => {
-    BannerBot.allBots.forEach(bot => bot.produceCookies());
+  BannerBot.allBots.forEach(bot => bot.produceCookies());
 }, 1000);
 
 // ===== Bot Types =====
 const botTypes = {
-    emojiHappy: { name: "emojiHappy", image: "assets/pictures/emojiHappy.png", cookiesPerTick: 1, cost: 50 },
-    emojiHands: { name: "emojiHands", image: "assets/pictures/emojiHands.png", cookiesPerTick: 5, cost: 100 },
-    emojiThink: { name: "emojiThink", image: "assets/pictures/emojiThink.png", cookiesPerTick: 10, cost: 200 },
-    emojiTongue: { name: "emojiTongue", image: "assets/pictures/emojiTongue.png", cookiesPerTick: 20, cost: 400 },
-    emojiOops: { name: "emojiOops", image: "assets/pictures/emojiOops.png", cookiesPerTick: 30, cost: 600 },
-    emojiDerp: { name: "emojiDerp", image: "assets/pictures/emojiDerp.png", cookiesPerTick: 50, cost: 1000 },
-    emojiStar: { name: "emojiStar", image: "assets/pictures/emojiStar.png", cookiesPerTick: 100, cost: 2000 }
+  emojiHappy: { name: "emojiHappy", image: "assets/pictures/emojiHappy.png", cookiesPerTick: 1, cost: 50 },
+  emojiHands: { name: "emojiHands", image: "assets/pictures/emojiHands.png", cookiesPerTick: 5, cost: 100 },
+  emojiThink: { name: "emojiThink", image: "assets/pictures/emojiThink.png", cookiesPerTick: 10, cost: 200 },
+  emojiTongue: { name: "emojiTongue", image: "assets/pictures/emojiTongue.png", cookiesPerTick: 20, cost: 400 },
+  emojiOops: { name: "emojiOops", image: "assets/pictures/emojiOops.png", cookiesPerTick: 30, cost: 600 },
+  emojiDerp: { name: "emojiDerp", image: "assets/pictures/emojiDerp.png", cookiesPerTick: 50, cost: 1000 },
+  emojiStar: { name: "emojiStar", image: "assets/pictures/emojiStar.png", cookiesPerTick: 100, cost: 2000 }
 };
 
 // ===== Initialize BotSpaces (banner slots) =====
@@ -376,25 +379,25 @@ const botSpaces = botSpaceIds.map(id => new BotSpace(document.getElementById(id)
 
 // ===== Map buttons to bot types =====
 const buttonBotMap = {
-    bot1: botTypes.emojiHappy,
-    bot2: botTypes.emojiHands,
-    bot3: botTypes.emojiThink,
-    bot4: botTypes.emojiTongue,
-    bot5: botTypes.emojiOops,
-    bot6: botTypes.emojiDerp,
-    bot7: botTypes.emojiStar
+  bot1: botTypes.emojiHappy,
+  bot2: botTypes.emojiHands,
+  bot3: botTypes.emojiThink,
+  bot4: botTypes.emojiTongue,
+  bot5: botTypes.emojiOops,
+  bot6: botTypes.emojiDerp,
+  bot7: botTypes.emojiStar
 };
 
 // ===== Setup purchase buttons =====
 botSpaces.forEach((botSpace, index) => {
-    const buttonId = `bot${index + 1}`;
-    const button = document.getElementById(buttonId);
-    if (!button) return;
+  const buttonId = `bot${index + 1}`;
+  const button = document.getElementById(buttonId);
+  if (!button) return;
 
-    button.addEventListener('click', () => {
-        const botType = buttonBotMap[buttonId];
-        botSpace.spawnBot(botType);
-    });
+  button.addEventListener('click', () => {
+      const botType = buttonBotMap[buttonId];
+      botSpace.spawnBot(botType);
+  });
 });
 
 // === CHALLENGE FUNCTIONS ===
@@ -524,82 +527,84 @@ function switchTheme(key, elClicked) {
 
 
 // === SAVE / LOAD ===
-
 function saveProgress() {
-  const progress = {
-    count: cookieInstance.count,
-    cookiesPerClick: cookiesPerClick,
-    upgrades:{},
-    skins:{},
-    botsPerRing: rings.map(ring => ring.bots.length),
-    botsPerBanner: botSpaces.map(botSpace => botSpace.bots.length),
-    activeTheme: Object.keys(themes).find(key => themes[key].active) || 'lightmode'
-  };
+    const progress = {
+        count: cookieInstance.count,
+        cookiesPerClick: cookiesPerClick,
+        upgrades: {},
+        skins: {},
+        botsPerRing: rings.map(ring => ring.bots.length),
+        botsPerBanner: botSpaces.map(botSpace =>
+            botSpace.bots.map(bot => bot.type.name)
+        ),
+        activeTheme: Object.keys(themes).find(key => themes[key].active) || 'lightmode'
+    };
 
-  for (const key in upgrades) {
-    progress.upgrades[key] = upgrades[key].active;
-  }
-  // for (const key in skins) {
-  // progress.skins[key] = skins[key].owned;
-  // }
+    for (const key in upgrades) {
+        progress.upgrades[key] = upgrades[key].active;
+    }
 
-  localStorage.setItem('cookieClickerProgress', JSON.stringify(progress));
+    localStorage.setItem('cookieClickerProgress', JSON.stringify(progress));
 }
 
 function loadProgress() {
-  const saved = localStorage.getItem('cookieClickerProgress');
-  if (!saved) return;
+    const saved = localStorage.getItem('cookieClickerProgress');
+    if (!saved) return;
 
-  const progress = JSON.parse(saved);
-  cookieInstance.count = progress.count || 0;
-  cookiesPerClick = progress.cookiesPerClick || 1;
+    const progress = JSON.parse(saved);
+    cookieInstance.count = progress.count || 0;
+    cookiesPerClick = progress.cookiesPerClick || 1;
 
-  for (const key in upgrades) {
-    upgrades[key].active = !!progress.upgrades[key];
-    if (upgrades[key].active) {
-      const buttonElement = document.getElementById(`${key}-multiplier`);
-      if (buttonElement) {
-        buttonElement.textContent = `${upgrades[key].multiplier}x Active`;
-        buttonElement.style.backgroundColor = 'lightgreen';
-      }
+    for (const key in upgrades) {
+        upgrades[key].active = !!progress.upgrades[key];
+        if (upgrades[key].active) {
+            const buttonElement = document.getElementById(`${key}-multiplier`);
+            if (buttonElement) {
+                buttonElement.textContent = `${upgrades[key].multiplier}x Active`;
+                buttonElement.style.backgroundColor = 'lightgreen';
+            }
+        }
     }
-  }
 
-  if (progress.botsPerRing) {
-    progress.botsPerRing.forEach((count, index) => {
-      for (let i = 0; i < count; i++) {
-        rings[index].addBot();
-      }
-    });
-  }
+    if (progress.botsPerRing) {
+        progress.botsPerRing.forEach((count, index) => {
+            for (let i = 0; i < count; i++) {
+                rings[index].addBot();
+            }
+        });
+    }
 
-  if (progress.botsPerBanner) {
-    progress.botsPerBanner.forEach((count, index) => {
-      const botSpace = botSpaces[index];
-      const botType = Object.values(botTypes)[0]; // fallback, can improve later
-      for (let i = 0; i < count; i++) {
-        botSpace.spawnBot(botType);
-      }
-    });
-  }
+    if (progress.botsPerBanner) {
+        progress.botsPerBanner.forEach((botNames, index) => {
+            const botSpace = botSpaces[index];
+            if (!Array.isArray(botNames)) return;
 
-  updateCounter();
+            botNames.forEach(name => {
+                const botType = botTypes[name];
+                if (botType) {
+                    botSpace.spawnBot(botType, true);
+                }
+            });
+        });
+    }
 
-  if (rings.some(ring => ring.bots.length > 0)) {
-    isAnimating = true;
-    animate();
-  }
+    updateCounter();
+
+    if (rings.some(ring => ring.bots.length > 0)) {
+        isAnimating = true;
+        animate();
+    }
+
     const savedTheme = progress.activeTheme || 'lightmode';
-  if (themes[savedTheme]) {
-    const el = document.getElementById(savedTheme);
-    switchTheme(savedTheme, el);
-  }
-  window.onload = () => {
-    enableTransitions();
-  };
+    if (themes[savedTheme]) {
+        const el = document.getElementById(savedTheme);
+        switchTheme(savedTheme, el);
+    }
+
+    window.onload = () => {
+        enableTransitions();
+    };
 }
-
-
 // make the lightbeams spin
 const img = document.getElementById('beams');
 let angle = 0;
