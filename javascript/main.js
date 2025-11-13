@@ -800,8 +800,8 @@ class Skin{
   owned;
 
   constructor(name, cost) {
-    this.name = name;
-    this.cost = cost;
+    this.name = name
+    this.cost = cost
     this.active = false;
     this.owned = false;
   }
@@ -828,7 +828,7 @@ function changeSkin(key, skinButton){
   const skin = skins[key];
   if (skin.owned === false){
     if (cookieInstance.count >= skin.cost) {
-      cookieInstance.count -= skin.cost;
+      cookieInstance.count -= skin.cost
       skin.owned = true;
       skinButton.style.backgroundColor = 'lightgreen';
     } else return;
