@@ -111,10 +111,14 @@
                 <img id="3x-multiplier" class="item2" src="assets/pictures/Cookie.png" alt="">
                 <img id="5x-multiplier" class="item3" src="assets/pictures/Cookie.png" alt="">
                 <img id="10x-multiplier" class="item4" src="assets/pictures/Cookie.png" alt="">
-                <img class="item5" src="assets/pictures/Cookie.png" alt="">
-                <img class="item6" src="assets/pictures/Cookie.png" alt="">
-                <img class="item7" src="assets/pictures/Cookie.png" alt="">
-                <img class="item8" src="assets/pictures/Cookie.png" alt="">
+                <img class="item5" src="assets/pictures/2xRingBot.png" alt="">
+                <img class="item6" src="assets/pictures/2xEmojiHappy.png" alt="">
+                <img class="item7" src="assets/pictures/2xEmojiHands.png" alt="">
+                <img class="item8" src="assets/pictures/2xEmojiThink.png" alt="">
+                <img class="item9" src="assets/pictures/2xEmojiTongue.png" alt="">
+                <img class="item10" src="assets/pictures/2xEmojiOops.png" alt="">
+                <img class="item11" src="assets/pictures/2xEmojiDerp.png" alt="">
+                <img class="item12" src="assets/pictures/2xEmojiStar.png" alt="">
             </div>
         </div>
         <div class="dropdown">
