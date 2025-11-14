@@ -873,9 +873,7 @@ function changeSkin(key, skinButton){
  
 }
 
-// ================================================================
-// AUTO TOOLTIP GENERATOR (NO HTML CHANGES NEEDED)
-// ================================================================
+// AUTO TOOLTIP GENERATOR
 
 const tooltip = document.getElementById("tooltip");
 
@@ -918,10 +916,6 @@ function attachTooltip(element, cost) {
   });
 }
 
-
-// ================================================================
-// 1. SKINS
-// ================================================================
 for (const key in skins) {
     const skin = skins[key];
     const el = document.getElementById(key);
@@ -930,10 +924,6 @@ for (const key in skins) {
     }
 }
 
-// ================================================================
-// 2. UPGRADES
-// IDs look like: "2x-multiplier", "emojiHands-multiplier", etc.
-// ================================================================
 for (const key in upgrades) {
     const upgrade = upgrades[key];
     const id = `${key}-multiplier`;
@@ -943,17 +933,17 @@ for (const key in upgrades) {
     }
 }
 
-// ================================================================
-// 3. BOTS
-// Button IDs: bot1, bot2, bot3...
-// Map each button to botTypes (already done in code)
-// ================================================================
 for (const btnId in buttonBotMap) {
     const botType = buttonBotMap[btnId];
     const el = document.getElementById(btnId);
     if (el) {
         attachTooltip(el, botType.cost);
     }
+}
+
+const cursorBotButton = document.getElementById("addBotBtn");
+if (cursorBotButton) {
+    attachTooltip(cursorBotButton, 10);
 }
 
 
