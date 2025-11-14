@@ -7,6 +7,26 @@ class Cookie {
   }
 }
 
+
+class Skin{
+    name;
+    cost;
+    active;
+    owned;
+
+    constructor(name, cost) {
+        this.name = name
+        this.cost = cost
+        this.active = false;
+        this.owned = false;
+    }
+}
+const skins = {
+    'chain': new Skin("assets/pictures/pimp.png", 10000),
+    'pinata': new Skin("assets/pictures/pinata.png", 8000),
+    'dropCookie': new Skin("assets/pictures/Cookie.png", 0),
+};
+
 let cookieInstance = new Cookie();
 const cookie = document.getElementById('cookie');
 const counter = document.getElementById('counter');
@@ -540,9 +560,14 @@ function saveProgress() {
         activeTheme: Object.keys(themes).find(key => themes[key].active) || 'lightmode'
     };
 
-  for (const key in upgrades) {
-    progress.upgrades[key] = upgrades[key].active;
-  }
+    for (const key in upgrades) {
+        progress.upgrades[key] = upgrades[key].active;
+    }
+
+    for (const key in skins) {
+        progress.skins[key] = skins[key].owned;
+    }
+
 
     localStorage.setItem('cookieClickerProgress', JSON.stringify(progress));
 }
@@ -600,6 +625,14 @@ function loadProgress() {
     if (themes[savedTheme]) {
         const el = document.getElementById(savedTheme);
         switchTheme(savedTheme, el);
+    }
+
+    if (progress.skins) {
+        Object.entries(progress.skins).forEach(val => {
+            let name=val[0];
+            let isowned=val[1];
+            skins[name].owned = isowned;
+        });
     }
 
     window.onload = () => {
@@ -793,24 +826,6 @@ updateCounter();
 
 
 
-class Skin{
-  name;
-  cost;
-  active;
-  owned;
-
-  constructor(name, cost) {
-    this.name = name
-    this.cost = cost
-    this.active = false;
-    this.owned = false;
-  }
-}
-const skins = {
-  'chain': new Skin("assets/pictures/pimp.png", 10000),
-  'pinata': new Skin("assets/pictures/pinata.png", 8000),
-  'dropCookie': new Skin("assets/pictures/Cookie.png", 0),
-};
 
 document.getElementById('chain').addEventListener('click', function () {
   changeSkin('chain', this);
