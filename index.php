@@ -114,14 +114,14 @@
                 <img id="10x-multiplier" class="item4" src="assets/pictures/Cookie.png" alt="">
 
                 <!-- Bot multipliers -->
-                <img id="ringBotUpgrade" class="item5" src="assets/pictures/2xRingBot.png" alt=""> 
-                <img id="2x-emojiHappy" class="item6" src="assets/pictures/2xEmojiHappy.png" alt="">
-                <img id="2x-emojiHands" class="item7" src="assets/pictures/2xEmojiHands.png" alt="">
-                <img id="2x-emojiThink" class="item8" src="assets/pictures/2xEmojiThink.png" alt="">
-                <img id="2x-emojiTongue" class="item9" src="assets/pictures/2xEmojiTongue.png" alt="">
-                <img id="2x-emojiOops" class="item10" src="assets/pictures/2xEmojiOops.png" alt="">
-                <img id="2x-emojiDerp" class="item11" src="assets/pictures/2xEmojiDerp.png" alt="">
-                <img id="2x-emojiStar" class="item12" src="assets/pictures/2xEmojiStar.png" alt="">
+                <img id="ringBot-multiplier" class="item5" src="assets/pictures/2xRingBot.png" alt=""> 
+                <img id="emojiHappy-multiplier" class="item6" src="assets/pictures/2xEmojiHappy.png" alt="">
+                <img id="emojiHands-multiplier" class="item7" src="assets/pictures/2xEmojiHands.png" alt="">
+                <img id="emojiThink-multiplier" class="item8" src="assets/pictures/2xEmojiThink.png" alt="">
+                <img id="emojiTongue-multiplier" class="item9" src="assets/pictures/2xEmojiTongue.png" alt="">
+                <img id="emojiOops-multiplier" class="item10" src="assets/pictures/2xEmojiOops.png" alt="">
+                <img id="emojiDerp-multiplier" class="item11" src="assets/pictures/2xEmojiDerp.png" alt="">
+                <img id="emojiStar-multiplier" class="item12" src="assets/pictures/2xEmojiStar.png" alt="">
             </div>
         </div>
         <div class="dropdown">

@@ -118,21 +118,25 @@ const upgrades = {
   '3x': new Upgrade(3, 30),
   '5x': new Upgrade(5, 100),
   '10x': new Upgrade(10, 5000),
+
+  'ringBot': new Upgrade(2, 500),
+  'emojiHappy': new Upgrade(2, 150),
+  'emojiHands': new Upgrade(2, 300),
+  'emojiThink': new Upgrade(2, 600),
+  'emojiTongue': new Upgrade(2, 900),
+  'emojiOops': new Upgrade(2, 1300),
+  'emojiDerp': new Upgrade(2, 2000),
+  'emojiStar': new Upgrade(2, 3000)
 };
 
-document.getElementById('2x-multiplier').addEventListener('click', function () {
-  buyMultiplier('2x', this);
-});
+Object.keys(upgrades).forEach(key => {
+  // Build the ID from the key (assumes HTML IDs follow the pattern "<key>-multiplier")
+  const elementId = key.includes('Bot') || key.includes('emoji') ? `${key}-multiplier` : `${key}-multiplier`;
+  const buttonElement = document.getElementById(elementId);
 
-document.getElementById('3x-multiplier').addEventListener('click', function () {
-  buyMultiplier('3x', this);
-});
-
-document.getElementById('5x-multiplier').addEventListener('click', function () {
-  buyMultiplier('5x', this);
-});
-document.getElementById('10x-multiplier').addEventListener('click', function () {
-  buyMultiplier('10x', this);
+  if (buttonElement) {
+      buttonElement.addEventListener('click', () => buyMultiplier(key, buttonElement));
+  }
 });
 
 function buyMultiplier(key, buttonElement) {
@@ -141,9 +145,20 @@ function buyMultiplier(key, buttonElement) {
 
   if (cookieInstance.count >= upgrade.cost) {
     cookieInstance.count -= upgrade.cost;
-    cookiesPerClick *= upgrade.multiplier;
-    upgrade.active = true;
 
+    if (['2x', '3x', '5x', '10x'].includes(key)) {
+        // Manual click multiplier
+        cookiesPerClick *= upgrade.multiplier;
+    } else {
+        // Bot-specific multiplier
+        BannerBot.allBots.forEach(bot => {
+            if (bot.type.name === key) {
+                bot.cookiesPerTick *= upgrade.multiplier;
+            }
+        });
+    }
+
+    upgrade.active = true;
     updateCounter();
 
     buttonElement.textContent = `${upgrade.multiplier}x Active`;
@@ -154,6 +169,8 @@ function buyMultiplier(key, buttonElement) {
     alert('Not enough cookies!');
   }
 }
+
+
 
 function emToPx(em) {
   const fontSize = parseFloat(getComputedStyle(document.body).fontSize);
@@ -853,7 +870,6 @@ function changeSkin(key, skinButton){
   skin.active = true;
 
   saveProgress();
-  loadProgress();
 
 }
 
