@@ -153,6 +153,18 @@
         </div>
 
     </div>
+    <div id="tooltip" style="
+        position: fixed;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        pointer-events: none;
+        white-space: nowrap;
+        display: none;
+        z-index: 9999;">
+    </div>
 </body>
 <script src="javascript/main.js"></script>
 </html>

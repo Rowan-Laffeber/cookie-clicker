@@ -873,7 +873,88 @@ function changeSkin(key, skinButton){
  
 }
 
+// ================================================================
+// AUTO TOOLTIP GENERATOR (NO HTML CHANGES NEEDED)
+// ================================================================
 
+const tooltip = document.getElementById("tooltip");
+
+// Helper: Attach tooltip to any element
+function attachTooltip(element, cost) {
+  if (!element) return;
+
+  element.addEventListener("mousemove", e => {
+      const tooltipWidth = tooltip.offsetWidth;
+      const tooltipHeight = tooltip.offsetHeight;
+      const padding = 15;
+
+      let x = e.pageX + padding;
+      let y = e.pageY + padding;
+
+      // Keep inside right edge
+      if (x + tooltipWidth > window.innerWidth) {
+          x = e.pageX - tooltipWidth - padding;
+      }
+
+      // Keep inside bottom edge
+      if (y + tooltipHeight > window.innerHeight) {
+          y = e.pageY - tooltipHeight - padding;
+      }
+
+      // Keep inside left edge
+      if (x < 0) x = 0;
+
+      // Keep inside top edge
+      if (y < 0) y = 0;
+
+      tooltip.style.display = "block";
+      tooltip.textContent = `Cost: ${cost}`;
+      tooltip.style.left = x + "px";
+      tooltip.style.top = y + "px";
+  });
+
+  element.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+  });
+}
+
+
+// ================================================================
+// 1. SKINS
+// ================================================================
+for (const key in skins) {
+    const skin = skins[key];
+    const el = document.getElementById(key);
+    if (el) {
+        attachTooltip(el, skin.cost);
+    }
+}
+
+// ================================================================
+// 2. UPGRADES
+// IDs look like: "2x-multiplier", "emojiHands-multiplier", etc.
+// ================================================================
+for (const key in upgrades) {
+    const upgrade = upgrades[key];
+    const id = `${key}-multiplier`;
+    const el = document.getElementById(id);
+    if (el) {
+        attachTooltip(el, upgrade.cost);
+    }
+}
+
+// ================================================================
+// 3. BOTS
+// Button IDs: bot1, bot2, bot3...
+// Map each button to botTypes (already done in code)
+// ================================================================
+for (const btnId in buttonBotMap) {
+    const botType = buttonBotMap[btnId];
+    const el = document.getElementById(btnId);
+    if (el) {
+        attachTooltip(el, botType.cost);
+    }
+}
 
 
 
