@@ -870,7 +870,7 @@ function changeSkin(key, skinButton){
   skin.active = true;
 
   saveProgress();
-
+ 
 }
 
 
