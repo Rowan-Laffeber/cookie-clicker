@@ -107,14 +107,21 @@
                     <p>upgrades</p>
             </div>
             <div class="dropdown-content upgrades">
+                <!-- Click multipliers -->
                 <img id="2x-multiplier" class="item1" src="assets/pictures/2x_upgrade.png" alt="">
                 <img id="3x-multiplier" class="item2" src="assets/pictures/Cookie.png" alt="">
                 <img id="5x-multiplier" class="item3" src="assets/pictures/Cookie.png" alt="">
                 <img id="10x-multiplier" class="item4" src="assets/pictures/Cookie.png" alt="">
-                <img class="item5" src="assets/pictures/Cookie.png" alt="">
-                <img class="item6" src="assets/pictures/Cookie.png" alt="">
-                <img class="item7" src="assets/pictures/Cookie.png" alt="">
-                <img class="item8" src="assets/pictures/Cookie.png" alt="">
+
+                <!-- Bot multipliers -->
+                <img id="ringBotUpgrade" class="item5" src="assets/pictures/2xRingBot.png" alt=""> 
+                <img id="2x-emojiHappy" class="item6" src="assets/pictures/2xEmojiHappy.png" alt="">
+                <img id="2x-emojiHands" class="item7" src="assets/pictures/2xEmojiHands.png" alt="">
+                <img id="2x-emojiThink" class="item8" src="assets/pictures/2xEmojiThink.png" alt="">
+                <img id="2x-emojiTongue" class="item9" src="assets/pictures/2xEmojiTongue.png" alt="">
+                <img id="2x-emojiOops" class="item10" src="assets/pictures/2xEmojiOops.png" alt="">
+                <img id="2x-emojiDerp" class="item11" src="assets/pictures/2xEmojiDerp.png" alt="">
+                <img id="2x-emojiStar" class="item12" src="assets/pictures/2xEmojiStar.png" alt="">
             </div>
         </div>
         <div class="dropdown">
